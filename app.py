@@ -1,4 +1,5 @@
 import streamlit as st
+from streamlit_option_menu import option_menu
 from database import initialize_database, get_connection
 from auth import show_login_page
 from student import show_student_dashboard
@@ -14,13 +15,13 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# ── Global CSS ──
 st.markdown("""
 <style>
     /* ══════════════════════════════════════
        FORCE LIGHT MODE FOR ALL USERS
        ══════════════════════════════════════ */
 
-    /* Force entire app to light mode */
     html, body, .stApp {
         color-scheme: light only !important;
         background-color: #FDF5E6 !important;
@@ -82,18 +83,19 @@ st.markdown("""
     .block-container {
         background-color: #FDF5E6 !important;
     }
-</style>
-""", unsafe_allow_html=True)
 
-# ── Global CSS ──
-st.markdown("""
-<style>
-    /* Main background */
+    /* ══════════════════════════════════════
+       MAIN BACKGROUND
+       ══════════════════════════════════════ */
+
     .stApp {
         background-color: #FDF5E6 !important;
     }
 
-    /* Sidebar Menu*/
+    /* ══════════════════════════════════════
+       FORCE SIDEBAR ALWAYS OPEN
+       ══════════════════════════════════════ */
+
     [data-testid="stSidebar"] {
         min-width: 280px !important;
         max-width: 280px !important;
@@ -114,7 +116,10 @@ st.markdown("""
         display: none !important;
     }
 
-    /* Main content */
+    /* ══════════════════════════════════════
+       MAIN CONTENT
+       ══════════════════════════════════════ */
+
     .block-container {
         padding-top: 1.5rem !important;
         padding-left: 2rem !important;
@@ -122,18 +127,28 @@ st.markdown("""
         max-width: 100% !important;
     }
 
-    /* Button styling */
+    /* ══════════════════════════════════════
+       BUTTON STYLING
+       ══════════════════════════════════════ */
+
     .stButton > button {
         border-radius: 8px !important;
         font-weight: 600 !important;
         transition: all 0.2s ease !important;
+        -webkit-appearance: none !important;
+        -moz-appearance: none !important;
+        appearance: none !important;
     }
+
     .stButton > button:hover {
         transform: translateY(-1px) !important;
         box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
     }
 
-    /* Form styling */
+    /* ══════════════════════════════════════
+       FORM STYLING
+       ══════════════════════════════════════ */
+
     [data-testid="stForm"] {
         background: white !important;
         padding: 25px !important;
@@ -142,7 +157,10 @@ st.markdown("""
         box-shadow: 0 2px 8px rgba(0,0,0,0.04) !important;
     }
 
-    /* Metric cards */
+    /* ══════════════════════════════════════
+       METRIC CARDS
+       ══════════════════════════════════════ */
+
     [data-testid="stMetric"] {
         background: white !important;
         padding: 15px !important;
@@ -156,7 +174,10 @@ st.markdown("""
         color: #2C3E50 !important;
     }
 
-    /* Expander */
+    /* ══════════════════════════════════════
+       EXPANDER
+       ══════════════════════════════════════ */
+
     .streamlit-expanderHeader {
         font-weight: 600 !important;
         color: #2C3E50 !important;
@@ -164,7 +185,10 @@ st.markdown("""
         border-radius: 8px !important;
     }
 
-    /* Tabs */
+    /* ══════════════════════════════════════
+       TABS
+       ══════════════════════════════════════ */
+
     .stTabs [data-baseweb="tab-list"] {
         gap: 8px !important;
     }
@@ -175,23 +199,72 @@ st.markdown("""
         font-weight: 600 !important;
     }
 
-    /* Inputs */
+    /* ══════════════════════════════════════
+       INPUTS
+       ══════════════════════════════════════ */
+
     .stTextInput > div > div > input {
         border-radius: 8px !important;
+        background-color: white !important;
+        color: #2C3E50 !important;
     }
     .stSelectbox > div > div {
         border-radius: 8px !important;
+        background-color: white !important;
+    }
+    .stTextArea > div > div > textarea {
+        border-radius: 8px !important;
+        background-color: white !important;
+        color: #2C3E50 !important;
+    }
+    .stNumberInput > div > div > input {
+        border-radius: 8px !important;
+        background-color: white !important;
+        color: #2C3E50 !important;
     }
 
-    /* Hide Streamlit branding */
+    /* ══════════════════════════════════════
+       HIDE STREAMLIT BRANDING
+       ══════════════════════════════════════ */
+
     #MainMenu  { visibility: hidden !important; }
     header     { visibility: hidden !important; }
     footer     { visibility: hidden !important; }
 
-    /* Scrollbar */
+    /* ══════════════════════════════════════
+       SCROLLBAR
+       ══════════════════════════════════════ */
+
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: #FDF5E6; }
-    ::-webkit-scrollbar-thumb { background: #BDC3C7; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb {
+        background: #BDC3C7;
+        border-radius: 4px;
+    }
+
+    /* ══════════════════════════════════════
+       MOBILE RESPONSIVE FIXES
+       ══════════════════════════════════════ */
+
+    @media (max-width: 768px) {
+        [data-testid="stSidebar"] {
+            min-width: 250px !important;
+            max-width: 250px !important;
+        }
+        .block-container {
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+        }
+        .stButton > button,
+        .stButton > button:active,
+        .stButton > button:focus {
+            -webkit-appearance: none !important;
+            -webkit-tap-highlight-color: transparent !important;
+        }
+        [data-testid="stMetricValue"] {
+            font-size: 22px !important;
+        }
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -236,7 +309,10 @@ def restore_session():
             conn = get_connection()
             if conn:
                 cursor = conn.cursor(dictionary=True)
-                cursor.execute("SELECT * FROM users WHERE user_id = %s", (int(uid),))
+                cursor.execute(
+                    "SELECT * FROM users WHERE user_id = %s",
+                    (int(uid),)
+                )
                 user = cursor.fetchone()
                 cursor.close()
                 conn.close()
@@ -252,7 +328,7 @@ def restore_session():
 #   MAIN APP ROUTING
 # ════════════════════════════════════════════
 
-# Step 1: Try to restore session from query params (handles refresh)
+# Step 1: Try to restore session from query params
 restore_session()
 
 # Step 2: Initialize session state defaults
