@@ -18,84 +18,12 @@ st.set_page_config(
 # ── Global CSS ──
 st.markdown("""
 <style>
-    /* ══════════════════════════════════════
-       FORCE LIGHT MODE FOR ALL USERS
-       ══════════════════════════════════════ */
-
-    html, body, .stApp {
-        color-scheme: light only !important;
-        background-color: #FDF5E6 !important;
-        color: #2C3E50 !important;
-    }
-
-    /* Force all text dark */
-    p, h1, h2, h3, h4, h5, h6,
-    span, label, div {
-        color: #2C3E50 !important;
-    }
-
-    /* Force sidebar white */
-    [data-testid="stSidebar"] {
-        background-color: #FDFEFE !important;
-        color: #2C3E50 !important;
-    }
-
-    /* Force all inputs white background */
-    .stTextInput > div > div > input,
-    .stTextArea > div > div > textarea,
-    .stSelectbox > div > div,
-    .stNumberInput > div > div > input {
-        background-color: white !important;
-        color: #2C3E50 !important;
-    }
-
-    /* Force expander white */
-    .streamlit-expanderHeader,
-    .streamlit-expanderContent {
-        background-color: white !important;
-        color: #2C3E50 !important;
-    }
-
-    /* Force form white */
-    [data-testid="stForm"] {
-        background-color: white !important;
-        color: #2C3E50 !important;
-    }
-
-    /* Force metric white */
-    [data-testid="stMetric"] {
-        background-color: white !important;
-        color: #2C3E50 !important;
-    }
-
-    /* Force tab white */
-    .stTabs [data-baseweb="tab"] {
-        background-color: white !important;
-        color: #2C3E50 !important;
-    }
-
-    /* Force main background */
+    /* Main background */
     .stApp {
         background-color: #FDF5E6 !important;
     }
 
-    /* Force block container */
-    .block-container {
-        background-color: #FDF5E6 !important;
-    }
-
-    /* ══════════════════════════════════════
-       MAIN BACKGROUND
-       ══════════════════════════════════════ */
-
-    .stApp {
-        background-color: #FDF5E6 !important;
-    }
-
-    /* ══════════════════════════════════════
-       FORCE SIDEBAR ALWAYS OPEN
-       ══════════════════════════════════════ */
-
+    /* Sidebar Menu*/
     [data-testid="stSidebar"] {
         min-width: 280px !important;
         max-width: 280px !important;
@@ -105,7 +33,7 @@ st.markdown("""
         transform: translateX(0px) !important;
         left: 0 !important;
         background-color: #FDFEFE !important;
-        border-right: 2px solid #E5E7E9 !important;
+        border-right: 2px solid #2C3E50 !important;
     }
 
     /* Hide collapse button */
@@ -116,10 +44,7 @@ st.markdown("""
         display: none !important;
     }
 
-    /* ══════════════════════════════════════
-       MAIN CONTENT
-       ══════════════════════════════════════ */
-
+    /* Main content */
     .block-container {
         padding-top: 1.5rem !important;
         padding-left: 2rem !important;
@@ -127,46 +52,26 @@ st.markdown("""
         max-width: 100% !important;
     }
 
-    /* ══════════════════════════════════════
-       BUTTON STYLING
-       ══════════════════════════════════════ */
+    /* ═══════════════════════════════════════════ */
+    /*   WHITE BOX CONTAINERS WITH DARK BORDERS   */
+    /* ═══════════════════════════════════════════ */
 
-    .stButton > button {
-        border-radius: 8px !important;
-        font-weight: 600 !important;
-        transition: all 0.2s ease !important;
-        -webkit-appearance: none !important;
-        -moz-appearance: none !important;
-        appearance: none !important;
-    }
-
-    .stButton > button:hover {
-        transform: translateY(-1px) !important;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
-    }
-
-    /* ══════════════════════════════════════
-       FORM STYLING
-       ══════════════════════════════════════ */
-
+    /* Form styling */
     [data-testid="stForm"] {
-        background: white !important;
+        background: #FFFFFF !important;
         padding: 25px !important;
         border-radius: 12px !important;
-        border: 1px solid #E5E7E9 !important;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.04) !important;
+        border: 1.5px solid #2C3E50 !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
     }
 
-    /* ══════════════════════════════════════
-       METRIC CARDS
-       ══════════════════════════════════════ */
-
+    /* Metric cards */
     [data-testid="stMetric"] {
-        background: white !important;
+        background: #FFFFFF !important;
         padding: 15px !important;
         border-radius: 10px !important;
-        border: 1px solid #E5E7E9 !important;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.04) !important;
+        border: 1.5px solid #2C3E50 !important;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.06) !important;
     }
     [data-testid="stMetricValue"] {
         font-size: 28px !important;
@@ -174,97 +79,135 @@ st.markdown("""
         color: #2C3E50 !important;
     }
 
-    /* ══════════════════════════════════════
-       EXPANDER
-       ══════════════════════════════════════ */
-
+    /* Expander */
+    [data-testid="stExpander"] {
+        background: #FFFFFF !important;
+        border-radius: 10px !important;
+        border: 1.5px solid #2C3E50 !important;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.06) !important;
+        overflow: hidden !important;
+    }
     .streamlit-expanderHeader {
         font-weight: 600 !important;
         color: #2C3E50 !important;
-        background: white !important;
-        border-radius: 8px !important;
+        background: #FFFFFF !important;
     }
 
-    /* ══════════════════════════════════════
-       TABS
-       ══════════════════════════════════════ */
+    /* Dataframe / Table */
+    [data-testid="stDataFrame"],
+    [data-testid="stTable"] {
+        background: #FFFFFF !important;
+        padding: 10px !important;
+        border-radius: 10px !important;
+        border: 1.5px solid #2C3E50 !important;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.06) !important;
+    }
 
+    /* Code block */
+    [data-testid="stCode"],
+    .stCodeBlock {
+        background: #FFFFFF !important;
+        border-radius: 10px !important;
+        border: 1.5px solid #2C3E50 !important;
+    }
+
+    /* Alert / Info / Warning / Success / Error boxes */
+    [data-testid="stAlert"] {
+        border-radius: 10px !important;
+        border: 1.5px solid #2C3E50 !important;
+    }
+
+    /* JSON display */
+    [data-testid="stJson"] {
+        background: #FFFFFF !important;
+        border-radius: 10px !important;
+        border: 1.5px solid #2C3E50 !important;
+        padding: 10px !important;
+    }
+
+    /* Tabs */
     .stTabs [data-baseweb="tab-list"] {
         gap: 8px !important;
+        border-bottom: 1.5px solid #2C3E50 !important;
     }
     .stTabs [data-baseweb="tab"] {
-        background: white !important;
+        background: #FFFFFF !important;
         border-radius: 8px 8px 0 0 !important;
         padding: 10px 20px !important;
         font-weight: 600 !important;
+        border: 1.5px solid #2C3E50 !important;
+        border-bottom: none !important;
+    }
+    .stTabs [data-baseweb="tab-panel"] {
+        background: #FFFFFF !important;
+        border: 1.5px solid #2C3E50 !important;
+        border-top: none !important;
+        border-radius: 0 0 10px 10px !important;
+        padding: 15px !important;
     }
 
-    /* ══════════════════════════════════════
-       INPUTS
-       ══════════════════════════════════════ */
+    /* Columns inner containers */
+    [data-testid="stVerticalBlock"] > div[data-testid="element-container"] > div > div[style*="background"] {
+        border: 1.5px solid #2C3E50 !important;
+        border-radius: 10px !important;
+    }
+
+    /* st.container with border=True */
+    [data-testid="stVerticalBlockBorderWrapper"] {
+        background: #FFFFFF !important;
+        border: 1.5px solid #2C3E50 !important;
+        border-radius: 10px !important;
+        padding: 15px !important;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.06) !important;
+    }
+
+    /* ═══════════════════════════════════════════ */
+    /*   BUTTON STYLING                           */
+    /* ═══════════════════════════════════════════ */
+
+    .stButton > button {
+        border-radius: 8px !important;
+        font-weight: 600 !important;
+        border: 1.5px solid #2C3E50 !important;
+        transition: all 0.2s ease !important;
+    }
+    .stButton > button:hover {
+        transform: translateY(-1px) !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+    }
+
+    /* ═══════════════════════════════════════════ */
+    /*   INPUTS                                   */
+    /* ═══════════════════════════════════════════ */
 
     .stTextInput > div > div > input {
         border-radius: 8px !important;
-        background-color: white !important;
-        color: #2C3E50 !important;
+        border: 1.5px solid #2C3E50 !important;
     }
     .stSelectbox > div > div {
         border-radius: 8px !important;
-        background-color: white !important;
+        border: 1.5px solid #2C3E50 !important;
     }
-    .stTextArea > div > div > textarea {
+    .stTextArea textarea {
         border-radius: 8px !important;
-        background-color: white !important;
-        color: #2C3E50 !important;
+        border: 1.5px solid #2C3E50 !important;
     }
     .stNumberInput > div > div > input {
         border-radius: 8px !important;
-        background-color: white !important;
-        color: #2C3E50 !important;
+        border: 1.5px solid #2C3E50 !important;
     }
 
-    /* ══════════════════════════════════════
-       HIDE STREAMLIT BRANDING
-       ══════════════════════════════════════ */
+    /* ═══════════════════════════════════════════ */
+    /*   HIDE BRANDING & SCROLLBAR                */
+    /* ═══════════════════════════════════════════ */
 
     #MainMenu  { visibility: hidden !important; }
     header     { visibility: hidden !important; }
     footer     { visibility: hidden !important; }
 
-    /* ══════════════════════════════════════
-       SCROLLBAR
-       ══════════════════════════════════════ */
-
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: #FDF5E6; }
-    ::-webkit-scrollbar-thumb {
-        background: #BDC3C7;
-        border-radius: 4px;
-    }
-
-    /* ══════════════════════════════════════
-       MOBILE RESPONSIVE FIXES
-       ══════════════════════════════════════ */
-
-    @media (max-width: 768px) {
-        [data-testid="stSidebar"] {
-            min-width: 250px !important;
-            max-width: 250px !important;
-        }
-        .block-container {
-            padding-left: 1rem !important;
-            padding-right: 1rem !important;
-        }
-        .stButton > button,
-        .stButton > button:active,
-        .stButton > button:focus {
-            -webkit-appearance: none !important;
-            -webkit-tap-highlight-color: transparent !important;
-        }
-        [data-testid="stMetricValue"] {
-            font-size: 22px !important;
-        }
-    }
+    ::-webkit-scrollbar-thumb { background: #BDC3C7; border-radius: 4px; }
 </style>
 """, unsafe_allow_html=True)
 
