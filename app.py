@@ -32,7 +32,7 @@ st.markdown("""
         transform: translateX(0px) !important;
         left: 0 !important;
         background-color: #FDFEFE !important;
-        border-right: 2px solid #2C3E50 !important;
+        border-right: 2px solid #E5E7E9 !important;
     }
 
     /* Hide collapse button */
@@ -51,26 +51,33 @@ st.markdown("""
         max-width: 100% !important;
     }
 
-    /* ═══════════════════════════════════════════ */
-    /*   WHITE BOX CONTAINERS WITH DARK BORDERS   */
-    /* ═══════════════════════════════════════════ */
+    /* Button styling */
+    .stButton > button {
+        border-radius: 8px !important;
+        font-weight: 600 !important;
+        transition: all 0.2s ease !important;
+    }
+    .stButton > button:hover {
+        transform: translateY(-1px) !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+    }
 
     /* Form styling */
     [data-testid="stForm"] {
-        background: #FFFFFF !important;
+        background: white !important;
         padding: 25px !important;
         border-radius: 12px !important;
-        border: 1.5px solid #2C3E50 !important;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
+        border: 1px solid #E5E7E9 !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04) !important;
     }
 
     /* Metric cards */
     [data-testid="stMetric"] {
-        background: #FFFFFF !important;
+        background: white !important;
         padding: 15px !important;
         border-radius: 10px !important;
-        border: 1.5px solid #2C3E50 !important;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.06) !important;
+        border: 1px solid #E5E7E9 !important;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.04) !important;
     }
     [data-testid="stMetricValue"] {
         font-size: 28px !important;
@@ -79,131 +86,38 @@ st.markdown("""
     }
 
     /* Expander */
-    [data-testid="stExpander"] {
-        background: #FFFFFF !important;
-        border-radius: 10px !important;
-        border: 1.5px solid #2C3E50 !important;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.06) !important;
-        overflow: hidden !important;
-    }
     .streamlit-expanderHeader {
         font-weight: 600 !important;
         color: #2C3E50 !important;
-        background: #FFFFFF !important;
-    }
-
-    /* Dataframe / Table */
-    [data-testid="stDataFrame"],
-    [data-testid="stTable"] {
-        background: #FFFFFF !important;
-        padding: 10px !important;
-        border-radius: 10px !important;
-        border: 1.5px solid #2C3E50 !important;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.06) !important;
-    }
-
-    /* Code block */
-    [data-testid="stCode"],
-    .stCodeBlock {
-        background: #FFFFFF !important;
-        border-radius: 10px !important;
-        border: 1.5px solid #2C3E50 !important;
-    }
-
-    /* Alert / Info / Warning / Success / Error boxes */
-    [data-testid="stAlert"] {
-        border-radius: 10px !important;
-        border: 1.5px solid #2C3E50 !important;
-    }
-
-    /* JSON display */
-    [data-testid="stJson"] {
-        background: #FFFFFF !important;
-        border-radius: 10px !important;
-        border: 1.5px solid #2C3E50 !important;
-        padding: 10px !important;
+        background: white !important;
+        border-radius: 8px !important;
     }
 
     /* Tabs */
     .stTabs [data-baseweb="tab-list"] {
         gap: 8px !important;
-        border-bottom: 1.5px solid #2C3E50 !important;
     }
     .stTabs [data-baseweb="tab"] {
-        background: #FFFFFF !important;
+        background: white !important;
         border-radius: 8px 8px 0 0 !important;
         padding: 10px 20px !important;
         font-weight: 600 !important;
-        border: 1.5px solid #2C3E50 !important;
-        border-bottom: none !important;
-    }
-    .stTabs [data-baseweb="tab-panel"] {
-        background: #FFFFFF !important;
-        border: 1.5px solid #2C3E50 !important;
-        border-top: none !important;
-        border-radius: 0 0 10px 10px !important;
-        padding: 15px !important;
     }
 
-    /* Columns inner containers */
-    [data-testid="stVerticalBlock"] > div[data-testid="element-container"] > div > div[style*="background"] {
-        border: 1.5px solid #2C3E50 !important;
-        border-radius: 10px !important;
-    }
-
-    /* st.container with border=True */
-    [data-testid="stVerticalBlockBorderWrapper"] {
-        background: #FFFFFF !important;
-        border: 1.5px solid #2C3E50 !important;
-        border-radius: 10px !important;
-        padding: 15px !important;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.06) !important;
-    }
-
-    /* ═══════════════════════════════════════════ */
-    /*   BUTTON STYLING                           */
-    /* ═══════════════════════════════════════════ */
-
-    .stButton > button {
-        border-radius: 8px !important;
-        font-weight: 600 !important;
-        border: 1.5px solid #2C3E50 !important;
-        transition: all 0.2s ease !important;
-    }
-    .stButton > button:hover {
-        transform: translateY(-1px) !important;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
-    }
-
-    /* ═══════════════════════════════════════════ */
-    /*   INPUTS                                   */
-    /* ═══════════════════════════════════════════ */
-
+    /* Inputs */
     .stTextInput > div > div > input {
         border-radius: 8px !important;
-        border: 1.5px solid #2C3E50 !important;
     }
     .stSelectbox > div > div {
         border-radius: 8px !important;
-        border: 1.5px solid #2C3E50 !important;
-    }
-    .stTextArea textarea {
-        border-radius: 8px !important;
-        border: 1.5px solid #2C3E50 !important;
-    }
-    .stNumberInput > div > div > input {
-        border-radius: 8px !important;
-        border: 1.5px solid #2C3E50 !important;
     }
 
-    /* ═══════════════════════════════════════════ */
-    /*   HIDE BRANDING & SCROLLBAR                */
-    /* ═══════════════════════════════════════════ */
-
+    /* Hide Streamlit branding */
     #MainMenu  { visibility: hidden !important; }
     header     { visibility: hidden !important; }
     footer     { visibility: hidden !important; }
 
+    /* Scrollbar */
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: #FDF5E6; }
     ::-webkit-scrollbar-thumb { background: #BDC3C7; border-radius: 4px; }
