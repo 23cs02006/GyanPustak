@@ -14,6 +14,77 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+st.markdown("""
+<style>
+    /* ══════════════════════════════════════
+       FORCE LIGHT MODE FOR ALL USERS
+       ══════════════════════════════════════ */
+
+    /* Force entire app to light mode */
+    html, body, .stApp {
+        color-scheme: light only !important;
+        background-color: #FDF5E6 !important;
+        color: #2C3E50 !important;
+    }
+
+    /* Force all text dark */
+    p, h1, h2, h3, h4, h5, h6,
+    span, label, div {
+        color: #2C3E50 !important;
+    }
+
+    /* Force sidebar white */
+    [data-testid="stSidebar"] {
+        background-color: #FDFEFE !important;
+        color: #2C3E50 !important;
+    }
+
+    /* Force all inputs white background */
+    .stTextInput > div > div > input,
+    .stTextArea > div > div > textarea,
+    .stSelectbox > div > div,
+    .stNumberInput > div > div > input {
+        background-color: white !important;
+        color: #2C3E50 !important;
+    }
+
+    /* Force expander white */
+    .streamlit-expanderHeader,
+    .streamlit-expanderContent {
+        background-color: white !important;
+        color: #2C3E50 !important;
+    }
+
+    /* Force form white */
+    [data-testid="stForm"] {
+        background-color: white !important;
+        color: #2C3E50 !important;
+    }
+
+    /* Force metric white */
+    [data-testid="stMetric"] {
+        background-color: white !important;
+        color: #2C3E50 !important;
+    }
+
+    /* Force tab white */
+    .stTabs [data-baseweb="tab"] {
+        background-color: white !important;
+        color: #2C3E50 !important;
+    }
+
+    /* Force main background */
+    .stApp {
+        background-color: #FDF5E6 !important;
+    }
+
+    /* Force block container */
+    .block-container {
+        background-color: #FDF5E6 !important;
+    }
+</style>
+""", unsafe_allow_html=True)
+
 # ── Global CSS ──
 st.markdown("""
 <style>
