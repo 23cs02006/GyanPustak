@@ -3,10 +3,11 @@ import mysql.connector
 
 # ── Database Config ──
 DB_CONFIG = {
-    'host':     'localhost',
-    'user':     'root',
-    'password': 'Krishna@2005',         # ← Change to your MySQL password
-    'database': 'gyanpustak'
+    'host':     'sql12.freesqldatabase.com',
+    'user':     'sql12823446',
+    'password': 'KMvdsGAVYt',
+    'database': 'sql12823446',
+    'port':     3306
 }
 
 # ══════════════════════════════════════
