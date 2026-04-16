@@ -2,7 +2,7 @@
 base = "light"
 primaryColor = "#FF4B4B"
 backgroundColor = "#FDF5E6"
-secondaryBackgroundColor = "#FAE5C8"
+secondaryBackgroundColor = "#FFFFFF"
 textColor = "#2C3E50"
 font = "sans serif"
 
