@@ -73,7 +73,7 @@ def show_admin_dashboard():
                 {user['first_name']} {user['last_name']}
             </h3>
             <p style="color:#7F8C8D; font-size:12px; margin:0;">
-                ⚙️ Administrator
+                Administrator
             </p>
         </div>
         <hr style="border:none; border-top:1px solid #E5E7E9; margin:10px 0;">
@@ -121,7 +121,7 @@ def show_admin_dashboard():
     #   DASHBOARD
     # ══════════════════════════════════════
     elif selected == "Dashboard":
-        st.title("⚙️ Administrator Dashboard")
+        st.title("Administrator Dashboard")
         st.markdown(f"### Welcome, **{user['first_name']}**! 👋")
         conn = get_connection()
         if conn:
@@ -147,14 +147,14 @@ def show_admin_dashboard():
 
             col1, col2, col3 = st.columns(3)
             with col1:
-                st.metric("📚 Total Books", book_count)
-                st.metric("🎓 Students", student_count)
+                st.metric("Total Books", book_count)
+                st.metric("Students", student_count)
             with col2:
-                st.metric("📦 Total Orders", order_count)
-                st.metric("🏫 Universities", uni_count)
+                st.metric("Total Orders", order_count)
+                st.metric("Universities", uni_count)
             with col3:
-                st.metric("🎫 Active Tickets", active_tickets)
-                st.metric("📖 Courses", course_count)
+                st.metric("Active Tickets", active_tickets)
+                st.metric("Courses", course_count)
 
             cursor.close()
             conn.close()
@@ -173,7 +173,7 @@ def show_admin_dashboard():
         if conn:
             cursor = conn.cursor(dictionary=True)
             tab1, tab2, tab3 = st.tabs([
-                "📋 All Books", "➕ Add Book", "✏️ Update Stock"
+                "All Books", "Add Book", "Update Stock"
             ])
 
             with tab1:
@@ -186,7 +186,7 @@ def show_admin_dashboard():
                 if books:
                     for book in books:
                         with st.expander(
-                            f"📖 {book['title']} (ID: {book['book_id']})"
+                            f"{book['title']} (ID: {book['book_id']})"
                         ):
                             col1, col2 = st.columns([1, 3])
                             with col1:
@@ -204,7 +204,7 @@ def show_admin_dashboard():
                                                 background:linear-gradient(135deg,#8E44AD,#6C3483);
                                                 border-radius:8px; display:flex;
                                                 align-items:center; justify-content:center;">
-                                        <span style="font-size:40px;">📚</span>
+                                        <span style="font-size:40px;"></span>
                                     </div>
                                     """, unsafe_allow_html=True)
 
@@ -249,7 +249,7 @@ def show_admin_dashboard():
                             btn_col1, btn_col2 = st.columns(2)
                             with btn_col1:
                                 if st.button(
-                                    f"✏️ Edit Book #{book['book_id']}",
+                                    f"Edit Book #{book['book_id']}",
                                     key=f"edit_book_{book['book_id']}",
                                     use_container_width=True
                                 ):
@@ -257,7 +257,7 @@ def show_admin_dashboard():
                                     st.rerun()
                             with btn_col2:
                                 if st.button(
-                                    f"🗑️ Delete Book #{book['book_id']}",
+                                    f"Delete Book #{book['book_id']}",
                                     key=f"del_book_{book['book_id']}",
                                     use_container_width=True
                                 ):
@@ -266,7 +266,7 @@ def show_admin_dashboard():
                                         (book['book_id'],)
                                     )
                                     conn.commit()
-                                    st.session_state['toast_message'] = "✅ Changes Updated! Book deleted."
+                                    st.session_state['toast_message'] = "Changes Updated! Book deleted."
                                     st.session_state['toast_icon'] = "🎉"
                                     st.rerun()
                 else:
@@ -302,7 +302,7 @@ def show_admin_dashboard():
                     authors_str  = st.text_input("Authors (comma-separated)")
                     keywords_str = st.text_input("Keywords (comma-separated)")
                     cover_image  = st.text_input(
-                        "📷 Book Cover Image URL (optional)",
+                        "Book Cover Image URL (optional)",
                         placeholder="https://covers.openlibrary.org/b/isbn/ISBN-L.jpg"
                     )
 
@@ -349,7 +349,7 @@ def show_admin_dashboard():
                                                 (book_id, kw)
                                             )
                                 conn.commit()
-                                st.session_state['toast_message'] = f"✅ Changes Updated! Book '{title}' added!"
+                                st.session_state['toast_message'] = f"Changes Updated! Book '{title}' added!"
                                 st.session_state['toast_icon'] = "🎉"
                                 st.rerun()
                             except Exception as e:
@@ -377,7 +377,7 @@ def show_admin_dashboard():
                                 (new_qty, book_options[selected_book])
                             )
                             conn.commit()
-                            st.session_state['toast_message'] = "✅ Changes Updated! Stock updated!"
+                            st.session_state['toast_message'] = "Changes Updated! Stock updated!"
                             st.session_state['toast_icon'] = "🎉"
                             st.rerun()
                 else:
@@ -407,7 +407,7 @@ def show_admin_dashboard():
                                     (cat_name,)
                                 )
                                 conn.commit()
-                                st.session_state['toast_message'] = "✅ Changes Updated! Category added!"
+                                st.session_state['toast_message'] = "Changes Updated! Category added!"
                                 st.session_state['toast_icon'] = "🎉"
                                 st.rerun()
                             except Exception as e:
@@ -433,7 +433,7 @@ def show_admin_dashboard():
                                     (c['category_id'],)
                                 )
                                 conn.commit()
-                                st.session_state['toast_message'] = "✅ Changes Updated! Category deleted."
+                                st.session_state['toast_message'] = "Changes Updated! Category deleted."
                                 st.session_state['toast_icon'] = "🎉"
                                 st.rerun()
                 else:
@@ -457,7 +457,7 @@ def show_admin_dashboard():
                                         (sub_name, cat_options[parent])
                                     )
                                     conn.commit()
-                                    st.session_state['toast_message'] = "✅ Changes Updated! Subcategory added!"
+                                    st.session_state['toast_message'] = "Changes Updated! Subcategory added!"
                                     st.session_state['toast_icon'] = "🎉"
                                     st.rerun()
                                 except Exception as e:
@@ -479,7 +479,7 @@ def show_admin_dashboard():
                         for s in subcats:
                             if s['cat_name'] != current_cat:
                                 current_cat = s['cat_name']
-                                st.markdown(f"**📂 {current_cat}**")
+                                st.markdown(f"**{current_cat}**")
                             col1, col2 = st.columns([4, 1])
                             with col1:
                                 st.write(
@@ -499,7 +499,7 @@ def show_admin_dashboard():
                                     )
                                     conn.commit()
                                     st.session_state['toast_message'] = (
-                                        f"✅ Changes Updated! "
+                                        f"Changes Updated! "
                                         f"Subcategory '{s['name']}' deleted."
                                     )
                                     st.session_state['toast_icon'] = "🎉"
@@ -544,27 +544,27 @@ def show_admin_dashboard():
                             VALUES (%s,%s,%s,%s,%s,%s)
                         """, (uni_name, uni_addr, rep_fn, rep_ln, rep_email, rep_phone))
                         conn.commit()
-                        st.session_state['toast_message'] = "✅ Changes Updated! University added!"
+                        st.session_state['toast_message'] = "Changes Updated! University added!"
                         st.session_state['toast_icon'] = "🎉"
                         st.rerun()
 
             st.markdown("---")
             cursor.execute("SELECT * FROM universities ORDER BY name")
             for u in cursor.fetchall():
-                with st.expander(f"🏫 {u['name']} (ID: {u['university_id']})"):
+                with st.expander(f"{u['name']} (ID: {u['university_id']})"):
                     st.write(f"**Address:** {u['address'] or 'N/A'}")
                     st.write(f"**Rep:** {u['rep_first_name']} {u['rep_last_name']}")
                     st.write(
                         f"**Email:** {u['rep_email'] or 'N/A'} | "
                         f"**Phone:** {u['rep_phone'] or 'N/A'}"
                     )
-                    if st.button("🗑️ Delete", key=f"del_uni_{u['university_id']}"):
+                    if st.button("Delete", key=f"del_uni_{u['university_id']}"):
                         cursor.execute(
                             "DELETE FROM universities WHERE university_id = %s",
                             (u['university_id'],)
                         )
                         conn.commit()
-                        st.session_state['toast_message'] = "✅ Changes Updated! University deleted."
+                        st.session_state['toast_message'] = "Changes Updated! University deleted."
                         st.session_state['toast_icon'] = "🎉"
                         st.rerun()
 
@@ -593,7 +593,7 @@ def show_admin_dashboard():
                                 (dept_name, uni_options[sel_uni])
                             )
                             conn.commit()
-                            st.session_state['toast_message'] = "✅ Changes Updated! Department added!"
+                            st.session_state['toast_message'] = "Changes Updated! Department added!"
                             st.session_state['toast_icon'] = "🎉"
                             st.rerun()
 
@@ -614,7 +614,7 @@ def show_admin_dashboard():
                                 (d['department_id'],)
                             )
                             conn.commit()
-                            st.session_state['toast_message'] = "✅ Changes Updated! Department deleted."
+                            st.session_state['toast_message'] = "Changes Updated! Department deleted."
                             st.session_state['toast_icon'] = "🎉"
                             st.rerun()
             else:
@@ -663,7 +663,7 @@ def show_admin_dashboard():
                                 uni_opts[sel_uni], dept_opts[sel_dept]
                             ))
                             conn.commit()
-                            st.session_state['toast_message'] = "✅ Changes Updated! Instructor added!"
+                            st.session_state['toast_message'] = "Changes Updated! Instructor added!"
                             st.session_state['toast_icon'] = "🎉"
                             st.rerun()
 
@@ -689,7 +689,7 @@ def show_admin_dashboard():
                                 (inst['instructor_id'],)
                             )
                             conn.commit()
-                            st.session_state['toast_message'] = "✅ Changes Updated! Instructor deleted."
+                            st.session_state['toast_message'] = "Changes Updated! Instructor deleted."
                             st.session_state['toast_icon'] = "🎉"
                             st.rerun()
             else:
@@ -729,7 +729,7 @@ def show_admin_dashboard():
                                 VALUES (%s,%s,%s,%s)
                             """, (course_name, uni_opts[sel_uni], year, semester))
                             conn.commit()
-                            st.session_state['toast_message'] = "✅ Changes Updated! Course added!"
+                            st.session_state['toast_message'] = "Changes Updated! Course added!"
                             st.session_state['toast_icon'] = "🎉"
                             st.rerun()
 
@@ -742,7 +742,7 @@ def show_admin_dashboard():
                 instructors = cursor.fetchall()
 
                 if courses and books and instructors:
-                    st.subheader("🔗 Link Book to Course")
+                    st.subheader("Link Book to Course")
                     with st.form("link_book_course"):
                         course_opts = {
                             f"{c['course_name']} (ID:{c['course_id']})": c['course_id']
@@ -783,14 +783,14 @@ def show_admin_dashboard():
                                     inst_opts[sel_inst], link_year, link_sem, req_type
                                 ))
                                 conn.commit()
-                                st.session_state['toast_message'] = "✅ Changes Updated! Book linked to course!"
+                                st.session_state['toast_message'] = "Changes Updated! Book linked to course!"
                                 st.session_state['toast_icon'] = "🎉"
                                 st.rerun()
                             except Exception as e:
                                 st.error(f"Error: {e}")
 
                 st.markdown("---")
-                st.subheader("📚 All Courses")
+                st.subheader("All Courses")
                 cursor.execute("""
                     SELECT c.*, u.name as uni_name FROM courses c
                     LEFT JOIN universities u ON c.university_id = u.university_id
@@ -800,12 +800,12 @@ def show_admin_dashboard():
                 if courses:
                     for c in courses:
                         with st.expander(
-                            f"📖 {c['course_name']} — "
+                            f"{c['course_name']} — "
                             f"{c['uni_name'] or 'N/A'} "
                             f"({c['year']} / {c['semester'] or ''})"
                         ):
                             if st.button(
-                                f"🗑️ Delete Course #{c['course_id']}",
+                                f"Delete Course #{c['course_id']}",
                                 key=f"del_course_{c['course_id']}",
                                 help=f"Delete course '{c['course_name']}'"
                             ):
@@ -815,13 +815,13 @@ def show_admin_dashboard():
                                 )
                                 conn.commit()
                                 st.session_state['toast_message'] = (
-                                    f"✅ Changes Updated! "
+                                    f"Changes Updated! "
                                     f"Course '{c['course_name']}' deleted."
                                 )
                                 st.session_state['toast_icon'] = "🎉"
                                 st.rerun()
 
-                            st.markdown("**📚 Linked Books:**")
+                            st.markdown("**Linked Books:**")
                             cursor.execute("""
                                 SELECT cb.course_id, cb.book_id,
                                        cb.instructor_id,
@@ -854,18 +854,18 @@ def show_admin_dashboard():
                                             <p style="margin:0; font-size:14px;
                                                        font-weight:600;
                                                        color:#2C3E50;">
-                                                📚 {cb['title']}
+                                                {cb['title']}
                                             </p>
                                             <p style="margin:3px 0 0 0;
                                                        font-size:12px;
                                                        color:#7F8C8D;">
-                                                👨‍🏫 Dr. {cb['first_name']} {cb['last_name']} &nbsp;|&nbsp;
+                                                Dr. {cb['first_name']} {cb['last_name']} &nbsp;|&nbsp;
                                                 <span style="color:{req_color};
                                                              font-weight:600;">
                                                     {cb['requirement_type'].upper()}
                                                 </span>
                                                 &nbsp;|&nbsp;
-                                                📅 {cb['year']} / {cb['semester'] or ''}
+                                                {cb['year']} / {cb['semester'] or ''}
                                             </p>
                                         </div>
                                         """, unsafe_allow_html=True)
@@ -895,7 +895,7 @@ def show_admin_dashboard():
                                             ))
                                             conn.commit()
                                             st.session_state['toast_message'] = (
-                                                f"✅ Changes Updated! "
+                                                f"Changes Updated! "
                                                 f"'{cb['title']}' removed "
                                                 f"from course."
                                             )
@@ -914,7 +914,7 @@ def show_admin_dashboard():
     #   TROUBLE TICKETS
     # ══════════════════════════════════════
     elif selected == "Trouble Tickets":
-        st.title("🎫 Trouble Tickets (Admin View)")
+        st.title("Trouble Tickets (Admin View)")
         st.info(
             "Administrators manage tickets with status: "
             "assigned, in-process, completed."
@@ -1015,7 +1015,7 @@ def show_admin_dashboard():
                                 ))
                                 conn.commit()
                                 st.session_state['toast_message'] = (
-                                    f"✅ Changes Updated! "
+                                    f"Changes Updated! "
                                     f"Ticket #{t['ticket_id']} updated!"
                                 )
                                 st.session_state['toast_icon'] = "🎉"
@@ -1063,7 +1063,7 @@ def show_admin_dashboard():
                         items = cursor.fetchall()
                         for it in items:
                             st.write(
-                                f"  📖 {it['title']} — "
+                                f"  {it['title']} — "
                                 f"Qty:{it['quantity']} — ₹{it['price']}"
                             )
 
@@ -1098,7 +1098,7 @@ def show_admin_dashboard():
                                         )
                                 conn.commit()
                                 st.session_state['toast_message'] = (
-                                    f"✅ Changes Updated! "
+                                    f"Changes Updated! "
                                     f"Order #{order['order_id']} updated!"
                                 )
                                 st.session_state['toast_icon'] = "🎉"
@@ -1175,9 +1175,9 @@ def show_admin_dashboard():
                     stars_str   = '⭐' * stars_full
 
                     with st.expander(
-                        f"📖 {book['title']} — "
+                        f"{book['title']} — "
                         f"{stars_str} {avg:.1f} — "
-                        f"💬 {review_label}"
+                        f"{review_label}"
                     ):
                         # ── Book header ──
                         hcol1, hcol2 = st.columns([1, 4])
@@ -1197,17 +1197,17 @@ def show_admin_dashboard():
                                             border-radius:8px; display:flex;
                                             align-items:center;
                                             justify-content:center;">
-                                    <span style="font-size:28px;">📚</span>
+                                    <span style="font-size:28px;"></span>
                                 </div>
                                 """, unsafe_allow_html=True)
                         with hcol2:
-                            st.write(f"**📖 Book:** {book['title']}")
+                            st.write(f"**Book:** {book['title']}")
                             st.write(
                                 f"**⭐ Average Rating:** "
                                 f"{stars_str} ({avg:.1f} / 5)"
                             )
                             st.write(
-                                f"**💬 Total Reviews:** {book['review_count']}"
+                                f"**Total Reviews:** {book['review_count']}"
                             )
 
                         st.markdown("---")
@@ -1231,7 +1231,7 @@ def show_admin_dashboard():
 
                         if reviews:
                             st.subheader(
-                                f"📝 Individual Reviews "
+                                f"Individual Reviews "
                                 f"({'All' if rating_filter == 'All' else rating_filter})"
                             )
                             for rev in reviews:
@@ -1265,8 +1265,8 @@ def show_admin_dashboard():
                                         f"**{rev_name}** — "
                                         f"{rev_stars} ({rev_rating}/5)"
                                     )
-                                    st.write(f"💬 {rev_text}")
-                                    st.caption(f"📅 {rev_date}")
+                                    st.write(f"{rev_text}")
+                                    st.caption(f"{rev_date}")
 
                                 st.markdown(
                                     "<hr style='border:none; "
@@ -1326,7 +1326,7 @@ def show_admin_profile(user):
 
     col1, col2 = st.columns(2)
     with col1:
-        st.subheader("👤 Personal Information")
+        st.subheader("Personal Information")
         st.write(
             f"**Name:** "
             f"{fresh_user['first_name']} {fresh_user['last_name']}"
@@ -1343,7 +1343,7 @@ def show_admin_profile(user):
             f"{fresh_user['created_at'].strftime('%d %b %Y')}"
         )
     with col2:
-        st.subheader("💼 Employment Information")
+        st.subheader("Employment Information")
         if emp:
             st.write(f"**Gender:** {emp['gender'] or 'N/A'}")
             st.write(f"**Salary:** ₹{emp['salary'] or '0.00'}")
@@ -1356,7 +1356,7 @@ def show_admin_profile(user):
             st.info("No employment details found.")
 
     st.markdown("---")
-    st.subheader("✏️ Change Profile")
+    st.subheader("Change Profile")
 
     with st.form("admin_change_profile_form", clear_on_submit=False):
 
@@ -1427,21 +1427,21 @@ def show_admin_profile(user):
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
             submitted = st.form_submit_button(
-                "💾 Save Changes",
+                "Save Changes",
                 use_container_width=True,
                 type="primary"
             )
 
         if submitted:
             if not new_first or not new_last or not new_email:
-                st.error("⚠️ First name, last name and email are required.")
+                st.error("First name, last name and email are required.")
             elif new_password and new_password != confirm_password:
-                st.error("⚠️ Passwords do not match.")
+                st.error("Passwords do not match.")
             elif new_password and len(new_password) < 6:
-                st.error("⚠️ Password must be at least 6 characters.")
+                st.error("Password must be at least 6 characters.")
             elif not new_aadhaar or len(new_aadhaar) != 12 \
                     or not new_aadhaar.isdigit():
-                st.error("⚠️ Aadhaar must be exactly 12 digits.")
+                st.error("Aadhaar must be exactly 12 digits.")
             else:
                 try:
                     cursor.execute(
@@ -1449,14 +1449,14 @@ def show_admin_profile(user):
                         (new_email, fresh_user['user_id'])
                     )
                     if cursor.fetchone():
-                        st.error("❌ This email is already used by another account.")
+                        st.error("This email is already used by another account.")
                     else:
                         cursor.execute("""
                             SELECT employee_id FROM employee_details
                             WHERE aadhaar_number = %s AND employee_id != %s
                         """, (new_aadhaar, fresh_user['user_id']))
                         if cursor.fetchone():
-                            st.error("❌ This Aadhaar is already used by another account.")
+                            st.error("This Aadhaar is already used by another account.")
                         else:
                             if new_password:
                                 import bcrypt
@@ -1512,13 +1512,13 @@ def show_admin_profile(user):
                             st.session_state['user']['phone']      = new_phone
                             st.session_state['user']['address']    = new_address
 
-                            st.session_state['toast_message'] = "✅ Changes Updated!"
+                            st.session_state['toast_message'] = "Changes Updated!"
                             st.session_state['toast_icon']    = "🎉"
                             st.rerun()
 
                 except Exception as e:
                     conn.rollback()
-                    st.error(f"❌ Error updating profile: {e}")
+                    st.error(f"Error updating profile: {e}")
 
     cursor.close()
     conn.close()
@@ -1571,7 +1571,7 @@ def show_edit_book(book_id):
         st.rerun()
 
     st.markdown("---")
-    st.title(f"✏️ Edit Book — {book['title']}")
+    st.title(f"Edit Book — {book['title']}")
     st.info("Update the book details below and click Save Changes.")
 
     with st.form("edit_book_form", clear_on_submit=False):
@@ -1655,7 +1655,7 @@ def show_edit_book(book_id):
             value=existing_keywords, key="eb_keywords"
         )
         new_cover_image = st.text_input(
-            "📷 Book Cover Image URL (optional)",
+            "Book Cover Image URL (optional)",
             value=book['cover_image'] or "",
             placeholder="https://covers.openlibrary.org/b/isbn/ISBN-L.jpg",
             key="eb_cover"
@@ -1675,14 +1675,14 @@ def show_edit_book(book_id):
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
             submitted = st.form_submit_button(
-                "💾 Save Changes",
+                "Save Changes",
                 use_container_width=True,
                 type="primary"
             )
 
         if submitted:
             if not new_title or not new_isbn:
-                st.error("⚠️ Title and ISBN are required.")
+                st.error("Title and ISBN are required.")
             else:
                 cat_id = None
                 if new_cat != "None":
@@ -1746,7 +1746,7 @@ def show_edit_book(book_id):
                     conn.commit()
                     del st.session_state['edit_book_id']
                     st.session_state['toast_message'] = (
-                        f"✅ Changes Updated! "
+                        f"Changes Updated! "
                         f"Book '{new_title}' updated successfully!"
                     )
                     st.session_state['toast_icon'] = "🎉"
@@ -1754,7 +1754,7 @@ def show_edit_book(book_id):
 
                 except Exception as e:
                     conn.rollback()
-                    st.error(f"❌ Error updating book: {e}")
+                    st.error(f"Error updating book: {e}")
 
     cursor.close()
     conn.close()
