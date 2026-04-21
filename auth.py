@@ -99,7 +99,7 @@ def show_login_page():
     # ── Show toast after registration ──
     if st.session_state.get('show_register_success'):
         st.toast(
-            "✅ Registration Successful! You can now login.",
+            "Registration Successful! You can now login.",
             icon="🎉"
         )
         del st.session_state['show_register_success']
@@ -107,7 +107,7 @@ def show_login_page():
     # ── Show toast after password reset ──
     if st.session_state.get('password_reset_success'):
         st.toast(
-            "✅ Password Reset Successfully! Please login.",
+            "Password Reset Successfully! Please login.",
             icon="🎉"
         )
         del st.session_state['password_reset_success']
@@ -116,7 +116,7 @@ def show_login_page():
     st.markdown("""
     <div style="text-align:center; padding: 30px 0 10px 0;">
         <h1 style="color:#2C3E50; font-size:48px; font-weight:800; margin-bottom:0;">
-            📚 GyanPustak
+            GyanPustak
         </h1>
         <p style="color:#7F8C8D; font-size:18px; margin-top:5px;">
             Your Trusted Online Textbook Platform
@@ -135,7 +135,7 @@ def show_login_page():
     # ── Show success banner after password reset ──
     if st.session_state.get('password_reset_banner'):
         st.success(
-            "✅ Password Reset Successfully! "
+            "Password Reset Successfully! "
             "You can now login with your new password."
         )
         del st.session_state['password_reset_banner']
@@ -151,9 +151,9 @@ def show_login_page():
 
     # ── Normal tabs ──
     tab1, tab2, tab3 = st.tabs([
-        "🔐 Login",
-        "📝 Register",
-        "🎫 Submit Trouble Ticket"
+        "Login",
+        "Register",
+        "Submit Trouble Ticket"
     ])
 
     # ══════════════════════════════════════
@@ -172,12 +172,12 @@ def show_login_page():
 
         with st.form("login_form", clear_on_submit=False):
             email    = st.text_input(
-                "📧 Email Address",
+                "Email Address",
                 placeholder="Enter your email",
                 key="login_email"
             )
             password = st.text_input(
-                "🔑 Password",
+                "Password",
                 type="password",
                 placeholder="Enter your password",
                 key="login_password"
@@ -185,30 +185,30 @@ def show_login_page():
             col1, col2, col3 = st.columns([1, 2, 1])
             with col2:
                 submitted = st.form_submit_button(
-                    "🔐 Login",
+                    "Login",
                     use_container_width=True,
                     type="primary"
                 )
             if submitted:
                 if not email or not password:
-                    st.error("⚠️ Please fill in all fields.")
+                    st.error("Please fill in all fields.")
                 else:
                     user = login_user(email, password)
                     if user:
                         st.session_state['logged_in'] = True
                         st.session_state['user']      = user
                         st.session_state['page']      = 'dashboard'
-                        st.success(f"✅ Welcome, {user['first_name']}!")
+                        st.success(f"Welcome, {user['first_name']}!")
                         st.rerun()
                     else:
-                        st.error("❌ Invalid email or password.")
+                        st.error("Invalid email or password.")
 
         # ── Forgot Password Button ──
         st.markdown("")
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
             if st.button(
-                "🔑 Forgot Password?",
+                "Forgot Password?",
                 use_container_width=True,
                 key="forgot_pass_btn"
             ):
@@ -219,10 +219,10 @@ def show_login_page():
     #   REGISTER TAB
     # ══════════════════════════════════════
     with tab2:
-        st.subheader("📝 Student Registration")
+        st.subheader("Student Registration")
 
         with st.form("register_student_form", clear_on_submit=False):
-            st.markdown("##### 📋 Personal Details")
+            st.markdown("##### Personal Details")
             col1, col2 = st.columns(2)
             with col1:
                 first_name = st.text_input(
@@ -259,7 +259,7 @@ def show_login_page():
                     key="s_dob"
                 )
 
-            st.markdown("##### 🎓 Academic Details")
+            st.markdown("##### Academic Details")
             col3, col4 = st.columns(2)
             with col3:
                 university     = st.text_input(
@@ -293,7 +293,7 @@ def show_login_page():
             col1, col2, col3 = st.columns([1, 2, 1])
             with col2:
                 submitted = st.form_submit_button(
-                    "📝 Register as Student",
+                    "Register as Student",
                     use_container_width=True,
                     type="primary"
                 )
@@ -301,9 +301,9 @@ def show_login_page():
             if submitted:
                 if not first_name or not last_name or not email \
                         or not password or not university or not major:
-                    st.error("⚠️ Please fill all required fields (*)")
+                    st.error("Please fill all required fields (*)")
                 elif len(password) < 6:
-                    st.error("⚠️ Password must be at least 6 characters.")
+                    st.error("Password must be at least 6 characters.")
                 else:
                     data = {
                         'first_name': first_name,
@@ -325,13 +325,13 @@ def show_login_page():
                         st.session_state['active_tab']            = 0
                         st.rerun()
                     else:
-                        st.error(f"❌ {msg}")
+                        st.error(f"{msg}")
 
     # ══════════════════════════════════════
     #   TROUBLE TICKET TAB
     # ══════════════════════════════════════
     with tab3:
-        st.subheader("🎫 Submit a Trouble Ticket")
+        st.subheader("Submit a Trouble Ticket")
         st.info(
             "If you are a registered student, you can submit a "
             "trouble ticket here. It will be reviewed by our "
@@ -361,13 +361,13 @@ def show_login_page():
             col1, col2, col3 = st.columns([1, 2, 1])
             with col2:
                 submitted = st.form_submit_button(
-                    "🎫 Submit Ticket",
+                    "Submit Ticket",
                     use_container_width=True,
                     type="primary"
                 )
             if submitted:
                 if not ticket_email or not ticket_title or not ticket_desc:
-                    st.error("⚠️ Please fill all required fields (*)")
+                    st.error("Please fill all required fields (*)")
                 else:
                     conn = get_connection()
                     if conn:
@@ -389,18 +389,18 @@ def show_login_page():
                             ))
                             conn.commit()
                             st.success(
-                                "✅ Ticket submitted successfully! "
+                                "Ticket submitted successfully! "
                                 "Our team will review it shortly."
                             )
                         elif user:
                             st.error(
-                                "❌ Only students can submit tickets "
+                                "Only students can submit tickets "
                                 "from this page. Please login to "
                                 "your dashboard."
                             )
                         else:
                             st.error(
-                                "❌ Email not found. "
+                                "Email not found. "
                                 "Please register first."
                             )
                         cursor.close()
@@ -431,7 +431,7 @@ def show_forgot_password_page():
 
     st.markdown("""
     <div style="text-align:center; padding: 10px 0 20px 0;">
-        <h2 style="color:#2C3E50; font-weight:800;">🔑 Forgot Password</h2>
+        <h2 style="color:#2C3E50; font-weight:800;">Forgot Password</h2>
         <p style="color:#7F8C8D; font-size:15px;">
             Reset your GyanPustak account password
         </p>
@@ -442,7 +442,7 @@ def show_forgot_password_page():
     <div style="background:#FEF9E7; border-left:4px solid #F39C12;
                 padding:15px 20px; border-radius:8px; margin-bottom:20px;">
         <p style="margin:0; color:#2C3E50; font-size:14px;">
-            ℹ️ Enter your registered email address and
+            Enter your registered email address and
             set a <strong>new password</strong> directly.
         </p>
     </div>
@@ -451,7 +451,7 @@ def show_forgot_password_page():
     # ── Step 1: Verify Email ──
     if not st.session_state.get('fp_email_verified'):
 
-        st.markdown("##### 📧 Step 1: Verify Your Email")
+        st.markdown("##### Step 1: Verify Your Email")
         with st.form("fp_verify_email", clear_on_submit=False):
             fp_email_input = st.text_input(
                 "Registered Email Address *",
@@ -461,14 +461,14 @@ def show_forgot_password_page():
             col1, col2, col3 = st.columns([1, 2, 1])
             with col2:
                 verify_submitted = st.form_submit_button(
-                    "🔍 Verify Email",
+                    "Verify Email",
                     use_container_width=True,
                     type="primary"
                 )
 
             if verify_submitted:
                 if not fp_email_input:
-                    st.error("⚠️ Please enter your email address.")
+                    st.error("Please enter your email address.")
                 else:
                     conn = get_connection()
                     if conn:
@@ -490,7 +490,7 @@ def show_forgot_password_page():
                             st.rerun()
                         else:
                             st.error(
-                                "❌ Email not found in our system. "
+                                "Email not found in our system. "
                                 "Please check and try again."
                             )
 
@@ -501,15 +501,15 @@ def show_forgot_password_page():
         fp_user_role      = st.session_state.get('fp_user_role', '')
 
         st.success(
-            f"✅ Email verified! Hello, **{fp_user_name}** "
+            f"Email verified! Hello, **{fp_user_name}** "
             f"({fp_user_role.replace('_', ' ').title()})."
         )
         st.markdown(
-            f"📧 Resetting password for: **{fp_verified_email}**"
+            f"Resetting password for: **{fp_verified_email}**"
         )
 
         st.markdown("---")
-        st.markdown("##### 🔐 Step 2: Set New Password")
+        st.markdown("##### Step 2: Set New Password")
 
         with st.form("fp_set_password", clear_on_submit=False):
             col1, col2 = st.columns(2)
@@ -530,18 +530,18 @@ def show_forgot_password_page():
             col1, col2, col3 = st.columns([1, 2, 1])
             with col2:
                 reset_submitted = st.form_submit_button(
-                    "💾 Set New Password",
+                    "Set New Password",
                     use_container_width=True,
                     type="primary"
                 )
 
             if reset_submitted:
                 if not new_pass or not confirm_pass:
-                    st.error("⚠️ Please fill both password fields.")
+                    st.error("Please fill both password fields.")
                 elif len(new_pass) < 6:
-                    st.error("⚠️ Password must be at least 6 characters.")
+                    st.error("Password must be at least 6 characters.")
                 elif new_pass != confirm_pass:
-                    st.error("⚠️ Passwords do not match.")
+                    st.error("Passwords do not match.")
                 else:
                     success, result = reset_password(
                         fp_verified_email, new_pass
@@ -565,13 +565,13 @@ def show_forgot_password_page():
                         # ── Redirect to login page ──
                         st.rerun()
                     else:
-                        st.error(f"❌ {result}")
+                        st.error(f"{result}")
 
         st.markdown("")
 
         # ── Use different email button ──
         if st.button(
-            "🔙 Use Different Email",
+            "← Use Different Email",
             use_container_width=False,
             key="use_diff_email"
         ):
@@ -597,7 +597,7 @@ def show_footer():
     st.markdown("""
     <div style="text-align:center; padding:20px; color:#7F8C8D;">
         <p style="font-size:14px;">
-            📚 <strong>GyanPustak</strong> —
+            <strong>GyanPustak</strong> —
             Your Trusted Online Textbook Platform
         </p>
         <p style="font-size:12px;">
