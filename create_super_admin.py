@@ -3,11 +3,10 @@ import mysql.connector
 
 # ── Database Config ──
 DB_CONFIG = {
-    'host':     'sql12.freesqldatabase.com',
-    'user':     'sql12823446',
-    'password': 'KMvdsGAVYt',
-    'database': 'sql12823446',
-    'port':     3306
+    'host':     'localhost',
+    'user':     'root',
+    'password': 'Krishna@2005',         # ← Change to your MySQL password
+    'database': 'gyanpustak'
 }
 
 # ══════════════════════════════════════
@@ -47,7 +46,7 @@ def create_super_admin():
             #   SUPER ADMIN EXISTS — ASK TO UPDATE
             # ════════════════════════════════════
             old_user_id = existing['user_id']
-            print("\n⚠️  A Super Admin already exists in the system.")
+            print("\nA Super Admin already exists in the system.")
             print(f"   Current Super Admin ID : {old_user_id}")
             print("   Do you want to UPDATE the existing Super Admin?")
             print("   The User ID will remain the SAME.")
@@ -58,7 +57,7 @@ def create_super_admin():
 
             if confirm.strip().lower() not in ['yes', 'y']:
                 print(
-                    "\n❌ Operation cancelled. "
+                    "\nOperation cancelled. "
                     "Existing Super Admin is unchanged."
                 )
                 cursor.close()
@@ -72,7 +71,7 @@ def create_super_admin():
             """, (SUPER_ADMIN['email'], old_user_id))
             if cursor.fetchone():
                 print(
-                    f"\n❌ Email '{SUPER_ADMIN['email']}' is already "
+                    f"\nEmail '{SUPER_ADMIN['email']}' is already "
                     f"used by another account."
                 )
                 print(
@@ -90,7 +89,7 @@ def create_super_admin():
             """, (SUPER_ADMIN['aadhaar'], old_user_id))
             if cursor.fetchone():
                 print(
-                    f"\n❌ Aadhaar '{SUPER_ADMIN['aadhaar']}' is already "
+                    f"\nAadhaar '{SUPER_ADMIN['aadhaar']}' is already "
                     f"used by another account."
                 )
                 print(
@@ -138,7 +137,7 @@ def create_super_admin():
             conn.commit()
 
             # ── Success message ──
-            print(f"\n✅ Super Admin updated successfully!")
+            print(f"\nSuper Admin updated successfully!")
             print("=" * 45)
             print(f"  User ID  : {old_user_id} (unchanged)")
             print(f"  Name     : {SUPER_ADMIN['first_name']} {SUPER_ADMIN['last_name']}")
@@ -147,8 +146,8 @@ def create_super_admin():
             print(f"  Role     : Super Administrator")
             print(f"  Phone    : {SUPER_ADMIN['phone']}")
             print("=" * 45)
-            print("\n👉 You can now login with the new credentials.")
-            print("⚠️  Please keep your credentials safe!\n")
+            print("\nYou can now login with the new credentials.")
+            print("Please keep your credentials safe!\n")
 
         else:
             # ════════════════════════════════════
@@ -162,7 +161,7 @@ def create_super_admin():
             )
             if cursor.fetchone():
                 print(
-                    f"\n❌ Email '{SUPER_ADMIN['email']}' is already "
+                    f"\nEmail '{SUPER_ADMIN['email']}' is already "
                     f"used by another account."
                 )
                 print(
@@ -181,7 +180,7 @@ def create_super_admin():
             )
             if cursor.fetchone():
                 print(
-                    f"\n❌ Aadhaar '{SUPER_ADMIN['aadhaar']}' is already "
+                    f"\nAadhaar '{SUPER_ADMIN['aadhaar']}' is already "
                     f"used by another account."
                 )
                 print(
@@ -223,7 +222,7 @@ def create_super_admin():
             conn.commit()
 
             # ── Success message ──
-            print("\n✅ Super Admin created successfully!")
+            print("\nSuper Admin created successfully!")
             print("=" * 45)
             print(f"  User ID  : {new_user_id}")
             print(f"  Name     : {SUPER_ADMIN['first_name']} {SUPER_ADMIN['last_name']}")
@@ -232,16 +231,16 @@ def create_super_admin():
             print(f"  Role     : Super Administrator")
             print(f"  Phone    : {SUPER_ADMIN['phone']}")
             print("=" * 45)
-            print("\n👉 You can now login at the GyanPustak website.")
-            print("⚠️  Please change your password after first login!\n")
+            print("\nYou can now login at the GyanPustak website.")
+            print("Please change your password after first login!\n")
 
         cursor.close()
         conn.close()
 
     except mysql.connector.Error as e:
-        print(f"\n❌ Database Error: {e}")
+        print(f"\nDatabase Error: {e}")
     except Exception as e:
-        print(f"\n❌ Error: {e}")
+        print(f"\nError: {e}")
 
 if __name__ == "__main__":
     create_super_admin()
