@@ -71,7 +71,7 @@ def show_cs_dashboard():
             <h3 style="margin-top:10px; margin-bottom:2px; color:#2C3E50; font-size:16px;">
                 {user['first_name']} {user['last_name']}
             </h3>
-            <p style="color:#7F8C8D; font-size:12px; margin:0;">🛠️ Customer Support</p>
+            <p style="color:#7F8C8D; font-size:12px; margin:0;">Customer Support</p>
         </div>
         <hr style="border:none; border-top:1px solid #E5E7E9; margin:10px 0;">
         """, unsafe_allow_html=True)
@@ -112,7 +112,7 @@ def show_cs_dashboard():
     #   DASHBOARD
     # ══════════════════════════════════════
     elif selected == "Dashboard":
-        st.title("🛠️ Customer Support Dashboard")
+        st.title("Customer Support Dashboard")
         st.markdown(f"### Welcome, **{user['first_name']}**! 👋")
 
         conn = get_connection()
@@ -156,7 +156,7 @@ def show_cs_dashboard():
             st.markdown("---")
 
             # ── Administrator Workload Overview ──
-            st.subheader("⚙️ Administrator Workload Overview")
+            st.subheader("Administrator Workload Overview")
             cursor.execute("""
                 SELECT
                     u.user_id,
@@ -227,7 +227,7 @@ def show_cs_dashboard():
                                 </p>
                                 <p style="margin:2px 0; font-size:11px;
                                            color:#7F8C8D;">
-                                    ✅ Completed: <strong>{adm['completed_count']}</strong>
+                                    Completed: <strong>{adm['completed_count']}</strong>
                                 </p>
                                 <span style="display:inline-block; margin-top:6px;
                                              background:{badge_color}; color:white;
@@ -267,7 +267,7 @@ def show_cs_dashboard():
     #   TROUBLE TICKETS
     # ══════════════════════════════════════
     elif selected == "Trouble Tickets":
-        st.title("🎫 Trouble Tickets")
+        st.title("Trouble Tickets")
         conn = get_connection()
         if conn:
             cursor = conn.cursor(dictionary=True)
@@ -295,9 +295,9 @@ def show_cs_dashboard():
 
             # ── Show Admin Workload Panel ──
             if admins:
-                st.subheader("⚙️ Administrator Workload")
+                st.subheader("Administrator Workload")
                 st.info(
-                    "ℹ️ Below shows how many tickets each administrator "
+                    "Below shows how many tickets each administrator "
                     "is currently handling. Use this to decide "
                     "who to assign tickets to."
                 )
@@ -341,7 +341,7 @@ def show_cs_dashboard():
                                 <p style="margin:4px 0 0 0; font-size:11px;
                                            color:#7F8C8D;">
                                     🔵 Active: <strong>{adm['active_tickets']}</strong> |
-                                    ✅ Done: <strong>{adm['completed_tickets']}</strong>
+                                    Done: <strong>{adm['completed_tickets']}</strong>
                                 </p>
                                 <span style="display:inline-block; margin-top:6px;
                                              background:{badge_color}; color:white;
@@ -469,7 +469,7 @@ def show_cs_dashboard():
                                         selected_admin_label.split(" — ")[0]
                                     )
                                     st.session_state['toast_message'] = (
-                                        f"✅ Changes Updated! "
+                                        f"Changes Updated! "
                                         f"Ticket #{t['ticket_id']} assigned "
                                         f"to {selected_admin_name}!"
                                     )
@@ -523,7 +523,7 @@ def show_cs_dashboard():
                         """, (t_cat, t_title, t_desc, user['user_id']))
                         conn.commit()
                         st.session_state['toast_message'] = (
-                            "✅ Changes Updated! Ticket created successfully!"
+                            "Changes Updated! Ticket created successfully!"
                         )
                         st.session_state['toast_icon'] = "🎉"
                         st.rerun()
@@ -578,14 +578,14 @@ def show_cs_dashboard():
                         items = cursor.fetchall()
                         for it in items:
                             st.write(
-                                f"📖 {it['title']} — "
+                                f"{it['title']} — "
                                 f"Qty: {it['quantity']} — "
                                 f"₹{it['price']} ({it['purchase_option']})"
                             )
 
                         if order['order_status'] not in ('canceled', 'shipped'):
                             if st.button(
-                                f"❌ Cancel Order #{order['order_id']}",
+                                f"Cancel Order #{order['order_id']}",
                                 key=f"cs_cancel_{order['order_id']}"
                             ):
                                 cursor.execute(
@@ -601,7 +601,7 @@ def show_cs_dashboard():
                                     )
                                 conn.commit()
                                 st.session_state['toast_message'] = (
-                                    f"✅ Changes Updated! "
+                                    f"Changes Updated! "
                                     f"Order #{order['order_id']} "
                                     f"canceled successfully."
                                 )
@@ -649,7 +649,7 @@ def show_cs_profile(user):
 
     col1, col2 = st.columns(2)
     with col1:
-        st.subheader("👤 Personal Information")
+        st.subheader("Personal Information")
         st.write(
             f"**Name:** "
             f"{fresh_user['first_name']} {fresh_user['last_name']}"
@@ -666,7 +666,7 @@ def show_cs_profile(user):
             f"{fresh_user['created_at'].strftime('%d %b %Y')}"
         )
     with col2:
-        st.subheader("💼 Employment Information")
+        st.subheader("Employment Information")
         if emp:
             st.write(f"**Gender:** {emp['gender'] or 'N/A'}")
             st.write(f"**Salary:** ₹{emp['salary'] or '0.00'}")
@@ -679,7 +679,7 @@ def show_cs_profile(user):
             st.info("No employment details found.")
 
     st.markdown("---")
-    st.subheader("✏️ Change Profile")
+    st.subheader("Change Profile")
 
     with st.form("cs_change_profile_form", clear_on_submit=False):
 
@@ -774,7 +774,7 @@ def show_cs_profile(user):
                     )
                     if cursor.fetchone():
                         st.error(
-                            "❌ This email is already used by another account."
+                            "This email is already used by another account."
                         )
                     else:
                         cursor.execute("""
@@ -784,7 +784,7 @@ def show_cs_profile(user):
                         """, (new_aadhaar, fresh_user['user_id']))
                         if cursor.fetchone():
                             st.error(
-                                "❌ This Aadhaar is already used "
+                                "This Aadhaar is already used "
                                 "by another account."
                             )
                         else:
@@ -842,13 +842,13 @@ def show_cs_profile(user):
                             st.session_state['user']['phone']      = new_phone
                             st.session_state['user']['address']    = new_address
 
-                            st.session_state['toast_message'] = "✅ Changes Updated!"
+                            st.session_state['toast_message'] = "Changes Updated!"
                             st.session_state['toast_icon']    = "🎉"
                             st.rerun()
 
                 except Exception as e:
                     conn.rollback()
-                    st.error(f"❌ Error updating profile: {e}")
+                    st.error(f"Error updating profile: {e}")
 
     cursor.close()
     conn.close()
