@@ -72,7 +72,7 @@ def show_student_dashboard():
                 {user['first_name']} {user['last_name']}
             </h3>
             <p style="color:#7F8C8D; font-size:12px; margin:0;">
-                🎓 Student
+                Student
             </p>
         </div>
         <hr style="border:none; border-top:1px solid #E5E7E9; margin:10px 0;">
@@ -151,16 +151,16 @@ def show_student_dashboard():
 
             col1, col2, col3, col4 = st.columns(4)
             with col1:
-                st.metric("📦 My Orders", order_count)
+                st.metric("My Orders", order_count)
             with col2:
-                st.metric("🛒 Cart Items", cart_count)
+                st.metric("Cart Items", cart_count)
             with col3:
-                st.metric("⭐ My Reviews", review_count)
+                st.metric("My Reviews", review_count)
             with col4:
-                st.metric("🎫 My Tickets", ticket_count)
+                st.metric("My Tickets", ticket_count)
 
             st.markdown("---")
-            st.subheader("📦 Recent Orders")
+            st.subheader("Recent Orders")
             cursor.execute("""
                 SELECT order_id, date_created, order_status, total_amount
                 FROM orders WHERE student_id = %s
@@ -295,7 +295,7 @@ def show_student_dashboard():
                                                 justify-content:center;
                                                 margin-bottom:10px;
                                                 box-shadow:0 4px 12px rgba(0,0,0,0.15);">
-                                        <span style="font-size:60px;">📚</span>
+                                        <span style="font-size:60px;"></span>
                                     </div>
                                     """, unsafe_allow_html=True)
 
@@ -391,14 +391,14 @@ def show_student_dashboard():
                                     bcol1, bcol2, bcol3 = st.columns(3)
                                     with bcol1:
                                         if st.button(
-                                            "👁️ View",
+                                            "View",
                                             key=f"view_{book['book_id']}"
                                         ):
                                             st.session_state['view_book_id'] = book['book_id']
                                             st.rerun()
                                     with bcol2:
                                         if st.button(
-                                            "🛒 Cart",
+                                            "Cart",
                                             key=f"cart_{book['book_id']}"
                                         ):
                                             add_to_cart(
@@ -406,12 +406,12 @@ def show_student_dashboard():
                                                 book['book_id'],
                                                 book['purchase_option']
                                             )
-                                            st.session_state['toast_message'] = "✅ Book added to cart!"
+                                            st.session_state['toast_message'] = "Book added to cart!"
                                             st.session_state['toast_icon']    = "🛒"
                                             st.rerun()
                                     with bcol3:
                                         if st.button(
-                                            "⭐ Rate",
+                                            "Rate",
                                             key=f"review_{book['book_id']}"
                                         ):
                                             st.session_state['review_book']       = book['book_id']
@@ -422,14 +422,14 @@ def show_student_dashboard():
                                     bcol1, bcol2 = st.columns(2)
                                     with bcol1:
                                         if st.button(
-                                            "👁️ View",
+                                            "View",
                                             key=f"view_{book['book_id']}"
                                         ):
                                             st.session_state['view_book_id'] = book['book_id']
                                             st.rerun()
                                     with bcol2:
                                         if st.button(
-                                            "🛒 Cart",
+                                            "Cart",
                                             key=f"cart_{book['book_id']}"
                                         ):
                                             add_to_cart(
@@ -437,13 +437,13 @@ def show_student_dashboard():
                                                 book['book_id'],
                                                 book['purchase_option']
                                             )
-                                            st.session_state['toast_message'] = "✅ Book added to cart!"
+                                            st.session_state['toast_message'] = "Book added to cart!"
                                             st.session_state['toast_icon']    = "🛒"
                                             st.rerun()
                                     # ── Already reviewed badge ──
                                     st.markdown(
                                         "<p style='color:#27AE60; font-size:12px; "
-                                        "margin:4px 0;'>✅ Already Reviewed</p>",
+                                        "margin:4px 0;'>Already Reviewed</p>",
                                         unsafe_allow_html=True
                                     )
 
@@ -452,14 +452,14 @@ def show_student_dashboard():
                                     bcol1, bcol2 = st.columns(2)
                                     with bcol1:
                                         if st.button(
-                                            "👁️ View",
+                                            "View",
                                             key=f"view_{book['book_id']}"
                                         ):
                                             st.session_state['view_book_id'] = book['book_id']
                                             st.rerun()
                                     with bcol2:
                                         if st.button(
-                                            "🛒 Cart",
+                                            "Cart",
                                             key=f"cart_{book['book_id']}"
                                         ):
                                             add_to_cart(
@@ -467,7 +467,7 @@ def show_student_dashboard():
                                                 book['book_id'],
                                                 book['purchase_option']
                                             )
-                                            st.session_state['toast_message'] = "✅ Book added to cart!"
+                                            st.session_state['toast_message'] = "Book added to cart!"
                                             st.session_state['toast_icon']    = "🛒"
                                             st.rerun()
             else:
@@ -477,7 +477,7 @@ def show_student_dashboard():
             if 'review_book' in st.session_state:
                 st.markdown("---")
                 st.subheader(
-                    f"⭐ Write Review for: "
+                    f"Write Review for: "
                     f"{st.session_state.get('review_book_title', '')}"
                 )
                 with st.form("review_form"):
@@ -512,7 +512,7 @@ def show_student_dashboard():
                             cursor2.close()
                             del st.session_state['review_book']
                             del st.session_state['review_book_title']
-                            st.session_state['toast_message'] = "✅ Review submitted!"
+                            st.session_state['toast_message'] = "Review submitted!"
                             st.session_state['toast_icon']    = "🎉"
                             st.rerun()
 
@@ -523,7 +523,7 @@ def show_student_dashboard():
     #   MY CART
     # ══════════════════════════════════════
     elif selected == "My Cart":
-        st.title("🛒 My Cart")
+        st.title("My Cart")
         conn = get_connection()
         if conn:
             cursor = conn.cursor(dictionary=True)
@@ -560,7 +560,7 @@ def show_student_dashboard():
                                             background:linear-gradient(135deg,#3498DB,#2C3E50);
                                             border-radius:6px; display:flex;
                                             align-items:center; justify-content:center;">
-                                    <span style="font-size:20px;">📚</span>
+                                    <span style="font-size:20px;"></span>
                                 </div>
                                 """, unsafe_allow_html=True)
                         with col2:
@@ -580,14 +580,14 @@ def show_student_dashboard():
                                     (item['cart_item_id'],)
                                 )
                                 conn.commit()
-                                st.session_state['toast_message'] = "✅ Changes Updated! Item removed."
+                                st.session_state['toast_message'] = "Changes Updated! Item removed."
                                 st.session_state['toast_icon']    = "🗑️"
                                 st.rerun()
                         total += float(item['price']) * item['quantity']
                         st.markdown("---")
 
-                    st.markdown(f"### 💰 Total: ₹{total:.2f}")
-                    st.subheader("🚚 Checkout")
+                    st.markdown(f"### Total: ₹{total:.2f}")
+                    st.subheader("Checkout")
                     with st.form("checkout_form"):
                         shipping  = st.selectbox(
                             "Shipping Type", ["standard", "2-day", "1-day"]
@@ -638,7 +638,7 @@ def show_student_dashboard():
                                     (cart['cart_id'],)
                                 )
                                 conn.commit()
-                                st.session_state['toast_message'] = f"✅ Changes Updated! Order #{order_id} placed!"
+                                st.session_state['toast_message'] = f"Changes Updated! Order #{order_id} placed!"
                                 st.session_state['toast_icon']    = "🎉"
                                 st.rerun()
                 else:
@@ -650,7 +650,7 @@ def show_student_dashboard():
     #   MY ORDERS
     # ══════════════════════════════════════
     elif selected == "My Orders":
-        st.title("📦 My Orders")
+        st.title("My Orders")
         conn = get_connection()
         if conn:
             cursor = conn.cursor(dictionary=True)
@@ -708,12 +708,12 @@ def show_student_dashboard():
                                                     border-radius:5px; display:flex;
                                                     align-items:center;
                                                     justify-content:center;">
-                                            <span style="font-size:16px;">📚</span>
+                                            <span style="font-size:16px;"></span>
                                         </div>
                                         """, unsafe_allow_html=True)
                                 with col2:
                                     st.write(
-                                        f"📖 **{it['title']}** — "
+                                        f"**{it['title']}** — "
                                         f"Qty: {it['quantity']} — "
                                         f"₹{it['price']} ({it['purchase_option']})"
                                     )
@@ -727,10 +727,10 @@ def show_student_dashboard():
                                     already_reviewed = cursor.fetchone()
 
                                     if already_reviewed:
-                                        st.success("✅ Already Reviewed")
+                                        st.success("Already Reviewed")
                                     else:
                                         if st.button(
-                                            f"⭐ Write Review for '{it['title']}'",
+                                            f"Write Review for '{it['title']}'",
                                             key=f"review_order_{order['order_id']}_{it['book_id']}"
                                         ):
                                             st.session_state['review_book']       = it['book_id']
@@ -747,7 +747,7 @@ def show_student_dashboard():
                             ):
                                 st.markdown("---")
                                 st.subheader(
-                                    f"⭐ Write Review for: "
+                                    f"Write Review for: "
                                     f"{st.session_state.get('review_book_title', '')}"
                                 )
                                 form_key = (
@@ -799,12 +799,12 @@ def show_student_dashboard():
                                                 ]:
                                                     if k in st.session_state:
                                                         del st.session_state[k]
-                                                st.session_state['toast_message'] = "✅ Review submitted!"
+                                                st.session_state['toast_message'] = "Review submitted!"
                                                 st.session_state['toast_icon']    = "🎉"
                                                 st.rerun()
                                             except Exception as e:
                                                 conn.rollback()
-                                                st.error(f"❌ Error: {e}")
+                                                st.error(f"Error: {e}")
 
                         # ── Cancel Button ──
                         # ── Only when status is 'new' ──
@@ -817,7 +817,7 @@ def show_student_dashboard():
                                 "contact Customer Support."
                             )
                             if st.button(
-                                f"❌ Cancel Order #{order['order_id']}",
+                                f"Cancel Order #{order['order_id']}",
                                 key=f"cancel_{order['order_id']}"
                             ):
                                 cursor.execute(
@@ -840,7 +840,7 @@ def show_student_dashboard():
                                     )
                                 conn.commit()
                                 st.session_state['toast_message'] = (
-                                    f"✅ Changes Updated! "
+                                    f"Changes Updated! "
                                     f"Order #{order['order_id']} canceled."
                                 )
                                 st.session_state['toast_icon'] = "🎉"
@@ -854,7 +854,7 @@ def show_student_dashboard():
     #   MY REVIEWS
     # ══════════════════════════════════════
     elif selected == "My Reviews":
-        st.title("⭐ My Reviews")
+        st.title("My Reviews")
         conn = get_connection()
         if conn:
             cursor = conn.cursor(dictionary=True)
@@ -888,19 +888,19 @@ def show_student_dashboard():
                                             border-radius:8px; display:flex;
                                             align-items:center;
                                             justify-content:center;">
-                                    <span style="font-size:28px;">📚</span>
+                                    <span style="font-size:28px;"></span>
                                 </div>
                                 """, unsafe_allow_html=True)
                         with col2:
-                            st.write(f"**📖 Book:** {rev['title']}")
+                            st.write(f"**Book:** {rev['title']}")
                             st.write(
-                                f"**⭐ Rating:** {stars} ({rev['rating']}/5)"
+                                f"**Rating:** {stars} ({rev['rating']}/5)"
                             )
                             st.write(
-                                f"**💬 Review:** "
+                                f"**Review:** "
                                 f"{rev['review_text'] or 'No text provided.'}"
                             )
-                            st.write(f"**📅 Date:** {rev_date}")
+                            st.write(f"**Date:** {rev_date}")
             else:
                 st.info("You haven't written any reviews yet.")
             cursor.close()
@@ -910,7 +910,7 @@ def show_student_dashboard():
     #   TROUBLE TICKETS
     # ══════════════════════════════════════
     elif selected == "Trouble Tickets":
-        st.title("🎫 My Trouble Tickets")
+        st.title("My Trouble Tickets")
         conn = get_connection()
         if conn:
             cursor = conn.cursor(dictionary=True)
@@ -938,7 +938,7 @@ def show_student_dashboard():
                             VALUES (%s, %s, %s, 'new', %s, 'student')
                         """, (t_cat, t_title, t_desc, user['user_id']))
                         conn.commit()
-                        st.session_state['toast_message'] = "✅ Changes Updated! Ticket submitted!"
+                        st.session_state['toast_message'] = "Changes Updated! Ticket submitted!"
                         st.session_state['toast_icon']    = "🎉"
                         st.rerun()
 
@@ -1067,7 +1067,7 @@ def show_book_detail(user):
                         border-radius:12px; display:flex;
                         align-items:center; justify-content:center;
                         box-shadow:0 6px 20px rgba(0,0,0,0.2);">
-                <span style="font-size:80px;">📚</span>
+                <span style="font-size:80px;"></span>
             </div>
             """, unsafe_allow_html=True)
 
@@ -1085,20 +1085,20 @@ def show_book_detail(user):
         authors = cursor.fetchall()
         if authors:
             st.markdown(
-                f"**✍️ Author(s):** "
+                f"**Author(s):** "
                 f"{', '.join(a['author_name'] for a in authors)}"
             )
         else:
             st.markdown("**✍️ Author(s):** N/A")
 
-        st.markdown(f"**📦 ISBN:** {book['isbn'] or 'N/A'}")
-        st.markdown(f"**🏢 Publisher:** {book['publisher'] or 'N/A'}")
+        st.markdown(f"**ISBN:** {book['isbn'] or 'N/A'}")
+        st.markdown(f"**Publisher:** {book['publisher'] or 'N/A'}")
         st.markdown(
-            f"**📅 Publication Date:** {book['publication_date'] or 'N/A'}"
+            f"**Publication Date:** {book['publication_date'] or 'N/A'}"
         )
-        st.markdown(f"**🔢 Edition:** {book['edition']}")
-        st.markdown(f"**🌐 Language:** {book['language']}")
-        st.markdown(f"**🏷️ Category:** {book['category_name'] or 'N/A'}")
+        st.markdown(f"**Edition:** {book['edition']}")
+        st.markdown(f"**Language:** {book['language']}")
+        st.markdown(f"**Category:** {book['category_name'] or 'N/A'}")
 
         cursor.execute(
             "SELECT keyword FROM book_keywords WHERE book_id = %s",
@@ -1107,7 +1107,7 @@ def show_book_detail(user):
         keywords = cursor.fetchall()
         if keywords:
             st.markdown(
-                f"**🔑 Keywords:** "
+                f"**Keywords:** "
                 f"{', '.join(k['keyword'] for k in keywords)}"
             )
 
@@ -1141,7 +1141,7 @@ def show_book_detail(user):
             bcol1, bcol2, bcol3 = st.columns(3)
             with bcol1:
                 if st.button(
-                    "🛒 Add to Cart",
+                    "Add to Cart",
                     key=f"detail_cart_{book_id}",
                     use_container_width=True,
                     type="primary"
@@ -1149,25 +1149,25 @@ def show_book_detail(user):
                     add_to_cart(
                         user['user_id'], book_id, book['purchase_option']
                     )
-                    st.session_state['toast_message'] = "✅ Book added to cart!"
+                    st.session_state['toast_message'] = "Book added to cart!"
                     st.session_state['toast_icon']    = "🛒"
                     st.rerun()
             with bcol2:
                 if st.button(
-                    "⭐ Write Review",
+                    "Write Review",
                     key=f"detail_review_{book_id}",
                     use_container_width=True
                 ):
                     st.session_state['review_book']       = book_id
                     st.session_state['review_book_title'] = book['title']
             with bcol3:
-                st.success("✅ Purchase verified")
+                st.success("Purchase verified")
 
         elif can_review and already_reviewed:
             bcol1, bcol2 = st.columns(2)
             with bcol1:
                 if st.button(
-                    "🛒 Add to Cart",
+                    "Add to Cart",
                     key=f"detail_cart_{book_id}",
                     use_container_width=True,
                     type="primary"
@@ -1175,17 +1175,17 @@ def show_book_detail(user):
                     add_to_cart(
                         user['user_id'], book_id, book['purchase_option']
                     )
-                    st.session_state['toast_message'] = "✅ Book added to cart!"
+                    st.session_state['toast_message'] = "Book added to cart!"
                     st.session_state['toast_icon']    = "🛒"
                     st.rerun()
             with bcol2:
-                st.success("✅ Already Reviewed")
+                st.success("Already Reviewed")
 
         else:
             bcol1, bcol2 = st.columns(2)
             with bcol1:
                 if st.button(
-                    "🛒 Add to Cart",
+                    "Add to Cart",
                     key=f"detail_cart_{book_id}",
                     use_container_width=True,
                     type="primary"
@@ -1193,18 +1193,18 @@ def show_book_detail(user):
                     add_to_cart(
                         user['user_id'], book_id, book['purchase_option']
                     )
-                    st.session_state['toast_message'] = "✅ Book added to cart!"
+                    st.session_state['toast_message'] = "Book added to cart!"
                     st.session_state['toast_icon']    = "🛒"
                     st.rerun()
             with bcol2:
-                st.info("🔒 Purchase & ship to review")
+                st.info("Purchase & ship to review")
 
     st.markdown("---")
 
     # ══════════════════════════════════════
     #   COURSES & INSTRUCTORS
     # ══════════════════════════════════════
-    st.subheader("📖 Courses & Instructors")
+    st.subheader("Courses & Instructors")
     cursor.execute("""
         SELECT cb.requirement_type, cb.year, cb.semester,
                c.course_name,
@@ -1230,11 +1230,11 @@ def show_book_detail(user):
             inst_name = f"Dr. {cl['inst_fn']} {cl['inst_ln']}"
 
             with st.expander(
-                f"📚 {cl['course_name']} — {uni_name} ({cl_year})"
+                f"{cl['course_name']} — {uni_name} ({cl_year})"
             ):
-                st.write(f"**📚 Course:** {cl['course_name']}")
-                st.write(f"**🏫 University:** {uni_name}")
-                st.write(f"**📅 Year / Semester:** {cl_year} / {cl_sem}")
+                st.write(f"**Course:** {cl['course_name']}")
+                st.write(f"**University:** {uni_name}")
+                st.write(f"**Year / Semester:** {cl_year} / {cl_sem}")
                 st.write(
                     f"**Instructor:** {inst_name} {dept_str}"
                 )
@@ -1255,7 +1255,7 @@ def show_book_detail(user):
         (book_id,)
     )
     total_reviews = cursor.fetchone()['cnt']
-    st.subheader(f"💬 Student Reviews ({total_reviews})")
+    st.subheader(f"Student Reviews ({total_reviews})")
 
     cursor.execute("""
         SELECT r.*, u.first_name, u.last_name
@@ -1279,7 +1279,7 @@ def show_book_detail(user):
             ):
                 st.write(f"**Rating:** {rev_stars} ({rev_rating}/5)")
                 st.write(f"**Review:** {rev_text}")
-                st.caption(f"📅 {rev_date}")
+                st.caption(f"{rev_date}")
     else:
         st.info(
             "No reviews yet. "
@@ -1321,7 +1321,7 @@ def show_book_detail(user):
                     del st.session_state['review_book']
                     if 'review_book_title' in st.session_state:
                         del st.session_state['review_book_title']
-                    st.session_state['toast_message'] = "✅ Review submitted!"
+                    st.session_state['toast_message'] = "Review submitted!"
                     st.session_state['toast_icon']    = "🎉"
                     st.rerun()
 
@@ -1399,7 +1399,7 @@ def show_profile(user):
 
             col1, col2 = st.columns(2)
             with col1:
-                st.subheader("👤 Personal Information")
+                st.subheader("Personal Information")
                 st.write(
                     f"**Name:** "
                     f"{fresh_user['first_name']} {fresh_user['last_name']}"
@@ -1416,7 +1416,7 @@ def show_profile(user):
                     f"{fresh_user['created_at'].strftime('%d %b %Y')}"
                 )
             with col2:
-                st.subheader("🎓 Academic Information")
+                st.subheader("Academic Information")
                 if details:
                     st.write(f"**University:** {details['university'] or 'N/A'}")
                     st.write(f"**Major:** {details['major'] or 'N/A'}")
@@ -1435,7 +1435,7 @@ def show_profile(user):
 
             col1, col2 = st.columns(2)
             with col1:
-                st.subheader("👤 Personal Information")
+                st.subheader("Personal Information")
                 st.write(
                     f"**Name:** "
                     f"{fresh_user['first_name']} {fresh_user['last_name']}"
@@ -1465,7 +1465,7 @@ def show_profile(user):
                     st.info("No employment details found.")
 
         st.markdown("---")
-        st.subheader("✏️ Change Profile")
+        st.subheader("Change Profile")
 
         with st.form("change_profile_form", clear_on_submit=False):
 
@@ -1653,7 +1653,7 @@ def _save_profile(cursor, conn, fresh_user,
             (new_email, fresh_user['user_id'])
         )
         if cursor.fetchone():
-            st.error("❌ This email is already used by another account.")
+            st.error("This email is already used by another account.")
             return
 
         if fresh_user['role'] in (
@@ -1664,7 +1664,7 @@ def _save_profile(cursor, conn, fresh_user,
                 WHERE aadhaar_number = %s AND employee_id != %s
             """, (role_extra['aadhaar'], fresh_user['user_id']))
             if cursor.fetchone():
-                st.error("❌ This Aadhaar is already used by another account.")
+                st.error("This Aadhaar is already used by another account.")
                 return
 
         if new_password:
@@ -1733,13 +1733,13 @@ def _save_profile(cursor, conn, fresh_user,
         st.session_state['user']['phone']      = new_phone
         st.session_state['user']['address']    = new_address
 
-        st.session_state['toast_message'] = "✅ Changes Updated!"
+        st.session_state['toast_message'] = "Changes Updated!"
         st.session_state['toast_icon']    = "🎉"
         st.rerun()
 
     except Exception as e:
         conn.rollback()
-        st.error(f"❌ Error updating profile: {e}")
+        st.error(f"Error updating profile: {e}")
 
 
 # ══════════════════════════════════════
