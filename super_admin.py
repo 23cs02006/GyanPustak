@@ -62,7 +62,7 @@ def show_super_admin_dashboard():
             <h3 style="margin-top:10px; margin-bottom:2px; color:#2C3E50; font-size:16px;">
                 {user['first_name']} {user['last_name']}
             </h3>
-            <p style="color:#7F8C8D; font-size:12px; margin:0;">👑 Super Administrator</p>
+            <p style="color:#7F8C8D; font-size:12px; margin:0;">Super Administrator</p>
         </div>
         <hr style="border:none; border-top:1px solid #E5E7E9; margin:10px 0;">
         """, unsafe_allow_html=True)
@@ -144,19 +144,19 @@ def show_super_admin_dashboard():
 
             col1, col2, col3 = st.columns(3)
             with col1:
-                st.metric("🎓 Total Students", students)
+                st.metric("Total Students", students)
             with col2:
-                st.metric("🛠️ Customer Support", cs_count)
+                st.metric("Customer Support", cs_count)
             with col3:
-                st.metric("⚙️ Administrators", admin_count)
+                st.metric("Administrators", admin_count)
 
             col4, col5, col6 = st.columns(3)
             with col4:
-                st.metric("👑 Super Admins", sa_count)
+                st.metric("Super Admins", sa_count)
             with col5:
-                st.metric("👥 Total Users", total_users)
+                st.metric("Total Users", total_users)
             with col6:
-                st.metric("🎫 Total Tickets", total_tickets)
+                st.metric("Total Tickets", total_tickets)
 
             st.markdown("---")
             st.subheader("Recently Added Employees")
@@ -171,7 +171,7 @@ def show_super_admin_dashboard():
             recent_emps = cursor.fetchall()
             if recent_emps:
                 for emp in recent_emps:
-                    role_icon = "🛠️" if emp['role'] == 'customer_support' else "⚙️"
+                    role_icon = "" if emp['role'] == 'customer_support' else ""
                     st.markdown(
                         f"{role_icon} **{emp['first_name']} {emp['last_name']}** — "
                         f"{emp['email']} — "
@@ -194,8 +194,8 @@ def show_super_admin_dashboard():
             "Select Employee Role",
             ["customer_support", "administrator"],
             format_func=lambda x: (
-                "🛠️ Customer Support" if x == "customer_support"
-                else "⚙️ Administrator"
+                "Customer Support" if x == "customer_support"
+                else "Administrator"
             )
         )
 
@@ -236,11 +236,11 @@ def show_super_admin_dashboard():
             if submitted:
                 if not first_name or not last_name or not email \
                         or not password or not aadhaar:
-                    st.error("⚠️ Please fill all required fields (*)")
+                    st.error("Please fill all required fields (*)")
                 elif len(password) < 6:
-                    st.error("⚠️ Password must be at least 6 characters.")
+                    st.error("Password must be at least 6 characters.")
                 elif len(aadhaar) != 12 or not aadhaar.isdigit():
-                    st.error("⚠️ Aadhaar must be exactly 12 digits.")
+                    st.error("Aadhaar must be exactly 12 digits.")
                 else:
                     conn = get_connection()
                     if conn:
@@ -248,7 +248,7 @@ def show_super_admin_dashboard():
                         try:
                             if role_choice == 'super_admin':
                                 st.error(
-                                    "❌ You cannot add another Super Admin. "
+                                    "You cannot add another Super Admin. "
                                     "Only 1 Super Admin is allowed."
                                 )
                             else:
@@ -257,7 +257,7 @@ def show_super_admin_dashboard():
                                     (email,)
                                 )
                                 if cursor.fetchone():
-                                    st.error("❌ Email already registered.")
+                                    st.error("Email already registered.")
                                 else:
                                     cursor.execute(
                                         "SELECT employee_id FROM employee_details "
@@ -265,7 +265,7 @@ def show_super_admin_dashboard():
                                         (aadhaar,)
                                     )
                                     if cursor.fetchone():
-                                        st.error("❌ Aadhaar number already registered.")
+                                        st.error("Aadhaar number already registered.")
                                     else:
                                         pw_hash = hash_password(password)
                                         cursor.execute("""
@@ -286,14 +286,14 @@ def show_super_admin_dashboard():
                                         conn.commit()
                                         role_label = role_choice.replace('_', ' ').title()
                                         st.session_state['toast_message'] = (
-                                            f"✅ Changes Updated! "
+                                            f"Changes Updated! "
                                             f"{role_label} {first_name} {last_name} added!"
                                         )
                                         st.session_state['toast_icon'] = "🎉"
                                         st.rerun()
                         except Exception as e:
                             conn.rollback()
-                            st.error(f"❌ Error: {e}")
+                            st.error(f"Error: {e}")
                         finally:
                             cursor.close()
                             conn.close()
@@ -315,12 +315,12 @@ def show_super_admin_dashboard():
                     "Filter by Role",
                     ["All", "customer_support", "administrator"],
                     format_func=lambda x: "All Employees" if x == "All"
-                        else ("🛠️ Customer Support" if x == "customer_support"
-                              else "⚙️ Administrator")
+                        else ("Customer Support" if x == "customer_support"
+                              else "Administrator")
                 )
             with col2:
                 search = st.text_input(
-                    "🔍 Search by Name or Email",
+                    "Search by Name or Email",
                     placeholder="Type name or email..."
                 )
 
@@ -359,7 +359,7 @@ def show_super_admin_dashboard():
                 st.markdown(f"**Total: {len(emps)} employee(s) found**")
                 st.markdown("---")
                 for emp in emps:
-                    icon       = '🛠️' if emp['role'] == 'customer_support' else '⚙️'
+                    icon       = '' if emp['role'] == 'customer_support' else ''
                     role_label = emp['role'].replace('_', ' ').title()
                     with st.expander(
                         f"{icon} {emp['first_name']} {emp['last_name']} "
@@ -368,13 +368,13 @@ def show_super_admin_dashboard():
                     ):
                         col1, col2 = st.columns(2)
                         with col1:
-                            st.subheader("👤 Personal Information")
+                            st.subheader("Personal Information")
                             st.write(f"**Name:** {emp['first_name']} {emp['last_name']}")
                             st.write(f"**Email:** {emp['email']}")
                             st.write(f"**Phone:** {emp['phone'] or 'N/A'}")
                             st.write(f"**Address:** {emp['address'] or 'N/A'}")
                         with col2:
-                            st.subheader("💼 Employment Information")
+                            st.subheader("Employment Information")
                             st.write(f"**Role:** {role_label}")
                             st.write(f"**Gender:** {emp['gender'] or 'N/A'}")
                             st.write(f"**Salary:** ₹{emp['salary'] or '0.00'}")
@@ -419,21 +419,21 @@ def show_super_admin_dashboard():
                                         """, (new_salary, emp['user_id']))
                                         conn.commit()
                                         st.session_state['toast_message'] = (
-                                            f"✅ Changes Updated! Salary updated for "
+                                            f"Changes Updated! Salary updated for "
                                             f"{emp['first_name']} {emp['last_name']}!"
                                         )
                                         st.session_state['toast_icon'] = "🎉"
                                         st.rerun()
                                     except Exception as e:
                                         conn.rollback()
-                                        st.error(f"❌ Error: {e}")
+                                        st.error(f"Error: {e}")
 
                         st.markdown("")
 
                         # ── Remove Employee Button ──
                         st.subheader("Remove Employee")
                         st.warning(
-                            f"⚠️ Removing **{emp['first_name']} {emp['last_name']}** "
+                            f"Removing **{emp['first_name']} {emp['last_name']}** "
                             f"will permanently delete their account."
                         )
                         col_a, col_b, col_c = st.columns([2, 1, 2])
@@ -449,7 +449,7 @@ def show_super_admin_dashboard():
                                 )
                                 conn.commit()
                                 st.session_state['toast_message'] = (
-                                    f"✅ Changes Updated! "
+                                    f"Changes Updated! "
                                     f"{emp['first_name']} {emp['last_name']} removed."
                                 )
                                 st.session_state['toast_icon'] = "🎉"
@@ -489,7 +489,7 @@ def show_super_admin_dashboard():
             )
 
             search = st.text_input(
-                "🔍 Search by Name or Email",
+                "Search by Name or Email",
                 placeholder="Type name or email..."
             )
 
@@ -528,14 +528,14 @@ def show_super_admin_dashboard():
                 st.markdown("---")
 
                 role_icons = {
-                    "student":          "🎓",
-                    "customer_support": "🛠️",
-                    "administrator":    "⚙️",
-                    "super_admin":      "👑"
+                    "student":          "",
+                    "customer_support": "",
+                    "administrator":    "",
+                    "super_admin":      ""
                 }
 
                 for u in users:
-                    icon       = role_icons.get(u['role'], '👤')
+                    icon       = role_icons.get(u['role'], '')
                     role_label = u['role'].replace('_', ' ').title()
 
                     with st.expander(
@@ -546,7 +546,7 @@ def show_super_admin_dashboard():
                         col1, col2 = st.columns(2)
 
                         with col1:
-                            st.subheader("👤 Personal Information")
+                            st.subheader("Personal Information")
                             st.write(f"**Full Name:** {u['first_name']} {u['last_name']}")
                             st.write(f"**Email:** {u['email']}")
                             st.write(f"**Phone:** {u['phone'] or 'N/A'}")
@@ -576,7 +576,7 @@ def show_super_admin_dashboard():
                                     WHERE employee_id = %s
                                 """, (u['user_id'],))
                                 emp = cursor.fetchone()
-                                st.subheader("💼 Employment Information")
+                                st.subheader("Employment Information")
                                 if emp:
                                     st.write(f"**Role:** {role_label}")
                                     st.write(f"**Gender:** {emp['gender'] or 'N/A'}")
@@ -622,13 +622,13 @@ def show_super_admin_dashboard():
 
                             col1, col2, col3, col4 = st.columns(4)
                             with col1:
-                                st.metric("📦 Orders", order_count)
+                                st.metric("Orders", order_count)
                             with col2:
-                                st.metric("⭐ Reviews", review_count)
+                                st.metric("Reviews", review_count)
                             with col3:
-                                st.metric("🎫 Tickets", ticket_count)
+                                st.metric("Tickets", ticket_count)
                             with col4:
-                                st.metric("🛒 Cart Items", cart_count)
+                                st.metric("Cart Items", cart_count)
 
                         # ── Employee Activity Stats ──
                         elif u['role'] in ('customer_support', 'administrator'):
@@ -649,9 +649,9 @@ def show_super_admin_dashboard():
 
                             col1, col2 = st.columns(2)
                             with col1:
-                                st.metric("🎫 Tickets Created", created_tickets)
+                                st.metric("Tickets Created", created_tickets)
                             with col2:
-                                st.metric("✅ Tickets Resolved", assigned_tickets)
+                                st.metric("Tickets Resolved", assigned_tickets)
 
             else:
                 if search:
@@ -688,7 +688,7 @@ def show_super_admin_dashboard():
 
             col1, col2 = st.columns(2)
             with col1:
-                st.subheader("👤 Personal Information")
+                st.subheader("Personal Information")
                 st.write(f"**Full Name:** {fresh_user['first_name']} {fresh_user['last_name']}")
                 st.write(f"**Email:** {fresh_user['email']}")
                 st.write(f"**Phone:** {fresh_user['phone'] or 'N/A'}")
@@ -697,7 +697,7 @@ def show_super_admin_dashboard():
                 st.write(f"**Joined:** {fresh_user['created_at'].strftime('%d %b %Y')}")
 
             with col2:
-                st.subheader("💼 Employment Information")
+                st.subheader("Employment Information")
                 if emp_details:
                     st.write(f"**Gender:** {emp_details['gender'] or 'N/A'}")
                     st.write(f"**Salary:** ₹{emp_details['salary'] or '0.00'}")
@@ -711,15 +711,15 @@ def show_super_admin_dashboard():
             st.markdown("---")
 
             tab1, tab2 = st.tabs([
-                "✏️ Change My Profile",
-                "💰 Update Employee Salaries"
+                "Change My Profile",
+                "Update Employee Salaries"
             ])
 
             # ──────────────────────────────────────
             #   TAB 1: CHANGE OWN PROFILE
             # ──────────────────────────────────────
             with tab1:
-                st.subheader("✏️ Update My Profile")
+                st.subheader("Update My Profile")
 
                 with st.form("sa_change_profile", clear_on_submit=False):
                     st.markdown("##### Personal Details")
@@ -807,13 +807,13 @@ def show_super_admin_dashboard():
 
                     if submitted:
                         if not new_first or not new_last or not new_email:
-                            st.error("⚠️ First name, last name and email are required.")
+                            st.error("First name, last name and email are required.")
                         elif new_password and new_password != confirm_password:
-                            st.error("⚠️ Passwords do not match.")
+                            st.error("Passwords do not match.")
                         elif new_password and len(new_password) < 6:
-                            st.error("⚠️ Password must be at least 6 characters.")
+                            st.error("Password must be at least 6 characters.")
                         elif not new_aadhaar or len(new_aadhaar) != 12 or not new_aadhaar.isdigit():
-                            st.error("⚠️ Aadhaar must be exactly 12 digits.")
+                            st.error("Aadhaar must be exactly 12 digits.")
                         else:
                             try:
                                 cursor.execute("""
@@ -821,14 +821,14 @@ def show_super_admin_dashboard():
                                     WHERE email = %s AND user_id != %s
                                 """, (new_email, fresh_user['user_id']))
                                 if cursor.fetchone():
-                                    st.error("❌ This email is already used by another account.")
+                                    st.error("This email is already used by another account.")
                                 else:
                                     cursor.execute("""
                                         SELECT employee_id FROM employee_details
                                         WHERE aadhaar_number = %s AND employee_id != %s
                                     """, (new_aadhaar, fresh_user['user_id']))
                                     if cursor.fetchone():
-                                        st.error("❌ This Aadhaar is already used by another account.")
+                                        st.error("This Aadhaar is already used by another account.")
                                     else:
                                         if new_password:
                                             import bcrypt
@@ -884,13 +884,13 @@ def show_super_admin_dashboard():
                                         st.session_state['user']['phone']      = new_phone
                                         st.session_state['user']['address']    = new_address
 
-                                        st.session_state['toast_message'] = "✅ Changes Updated!"
+                                        st.session_state['toast_message'] = "Changes Updated!"
                                         st.session_state['toast_icon']    = "🎉"
                                         st.rerun()
 
                             except Exception as e:
                                 conn.rollback()
-                                st.error(f"❌ Error: {e}")
+                                st.error(f"Error: {e}")
 
             # ──────────────────────────────────────
             #   TAB 2: UPDATE EMPLOYEE SALARIES
@@ -913,7 +913,7 @@ def show_super_admin_dashboard():
                     st.markdown("---")
 
                     for emp in employees:
-                        role_icon  = "🛠️" if emp['role'] == 'customer_support' else "⚙️"
+                        role_icon  = "" if emp['role'] == 'customer_support' else ""
                         role_label = emp['role'].replace('_', ' ').title()
 
                         with st.expander(
@@ -953,14 +953,14 @@ def show_super_admin_dashboard():
                                             """, (new_emp_salary, emp['user_id']))
                                             conn.commit()
                                             st.session_state['toast_message'] = (
-                                                f"✅ Changes Updated! Salary updated for "
+                                                f"Changes Updated! Salary updated for "
                                                 f"{emp['first_name']} {emp['last_name']}!"
                                             )
                                             st.session_state['toast_icon'] = "🎉"
                                             st.rerun()
                                         except Exception as e:
                                             conn.rollback()
-                                            st.error(f"❌ Error: {e}")
+                                            st.error(f"Error: {e}")
                 else:
                     st.info(
                         "No employees found. "
