@@ -2,11 +2,10 @@ import mysql.connector
 from mysql.connector import Error
 
 DB_CONFIG = {
-    'host':     'sql12.freesqldatabase.com',
-    'user':     'sql12823446',
-    'password': 'KMvdsGAVYt',
-    'database': 'sql12823446',
-    'port':     3306
+    'host':     'localhost',
+    'user':     'root',
+    'password': 'Krishna@2005',
+    'database': 'gyanpustak'
 }
 
 def get_connection():
@@ -18,12 +17,28 @@ def get_connection():
         return None
 
 def initialize_database():
+    # ── Step 1: Create database if not exists ──
+    try:
+        conn = mysql.connector.connect(
+            host=DB_CONFIG['host'],
+            user=DB_CONFIG['user'],
+            password=DB_CONFIG['password']
+        )
+        cursor = conn.cursor()
+        cursor.execute(f"CREATE DATABASE IF NOT EXISTS {DB_CONFIG['database']}")
+        cursor.close()
+        conn.close()
+    except Error as e:
+        print(f"Error creating database: {e}")
+        return
+
+    # ── Step 2: Connect to database ──
     conn = get_connection()
     if conn is None:
-        print("❌ Cannot connect to database.")
         return
     cursor = conn.cursor()
 
+    # ── Step 3: Create all tables ──
     tables = [
         """
         CREATE TABLE IF NOT EXISTS users (
@@ -336,6 +351,7 @@ def initialize_database():
 
     conn.commit()
 
+    # ── Trigger: Allow only 1 Super Admin ──
     try:
         cursor.execute("DROP TRIGGER IF EXISTS limit_super_admin")
         cursor.execute("""
@@ -354,10 +370,10 @@ def initialize_database():
             END
         """)
         conn.commit()
-        print("✅ Super Admin trigger created.")
+        print("Super Admin trigger created.")
     except Error as e:
         print(f"Trigger note: {e}")
 
     cursor.close()
     conn.close()
-    print("✅ Database initialized successfully.")
+    print("Database initialized successfully.")
