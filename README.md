@@ -209,20 +209,6 @@ This ensures two students cannot simultaneously purchase more copies than availa
 
 ---
 
-## 📸 Screenshots
-
-> Add your screenshots here after running the application.
-
-| Login Page | Student Dashboard | Browse Books |
-|-----------|------------------|-------------|
-| *screenshot* | *screenshot* | *screenshot* |
-
-| Shopping Cart | Admin Dashboard | Super Admin |
-|--------------|----------------|-------------|
-| *screenshot* | *screenshot* | *screenshot* |
-
----
-
 ## 🤝 Contributing
 
 1. Fork the repository
@@ -236,13 +222,6 @@ This ensures two students cannot simultaneously purchase more copies than availa
 ## 📄 License
 
 This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
-
----
-
-## 📧 Contact
-
-- **Email:** support@gyanpustak.com
-- **Phone:** +91-1800-XXX-XXXX
 
 ---
 
