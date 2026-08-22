@@ -219,12 +219,6 @@ This ensures two students cannot simultaneously purchase more copies than availa
 
 ---
 
-## 📄 License
-
-This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
-
----
-
 <p align="center">
   <strong>© 2025 GyanPustak. All rights reserved.</strong><br>
   Built with ❤️ for college students.
